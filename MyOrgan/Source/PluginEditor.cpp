@@ -15,6 +15,8 @@ MyOrganAudioProcessorEditor::MyOrganAudioProcessorEditor (MyOrganAudioProcessor&
     , drawBar7(Slider::LinearVertical, Slider::NoTextBox)
     , drawBar8(Slider::LinearVertical, Slider::NoTextBox)
 {
+    processor.addChangeListener(this);
+
     masterVolume.setRange(0.0, 1.0);
     masterVolume.setValue(1.0);
     masterVolume.onValueChange = [this] {
@@ -113,4 +115,18 @@ void MyOrganAudioProcessorEditor::resized()
     drawBar6.setBounds(area.removeFromLeft(drawBarWidth));
     drawBar7.setBounds(area.removeFromLeft(drawBarWidth));
     drawBar8.setBounds(area.removeFromLeft(drawBarWidth));
+}
+
+void MyOrganAudioProcessorEditor::changeListenerCallback(ChangeBroadcaster*)
+{
+    masterVolume.setValue(processor.synth.getMasterVolume());
+    drawBar0.setValue(processor.synth.getDrawBar(0));
+    drawBar1.setValue(processor.synth.getDrawBar(1));
+    drawBar2.setValue(processor.synth.getDrawBar(2));
+    drawBar3.setValue(processor.synth.getDrawBar(3));
+    drawBar4.setValue(processor.synth.getDrawBar(4));
+    drawBar5.setValue(processor.synth.getDrawBar(5));
+    drawBar6.setValue(processor.synth.getDrawBar(6));
+    drawBar7.setValue(processor.synth.getDrawBar(7));
+    drawBar8.setValue(processor.synth.getDrawBar(8));
 }

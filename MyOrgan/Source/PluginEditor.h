@@ -3,7 +3,8 @@
 #include "JuceHeader.h"
 #include "PluginProcessor.h"
 
-class MyOrganAudioProcessorEditor  : public AudioProcessorEditor
+class MyOrganAudioProcessorEditor : public AudioProcessorEditor,
+                                    public ChangeListener
 {
 public:
     MyOrganAudioProcessorEditor (MyOrganAudioProcessor&);
@@ -11,6 +12,8 @@ public:
 
     void paint (Graphics&) override;
     void resized() override;
+
+    void changeListenerCallback(ChangeBroadcaster*) override;
 
 private:
     MyOrganAudioProcessor& processor;

@@ -156,10 +156,17 @@ void MyOrganAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer
         else if (msg.isController())
         {
             int cn = msg.getControllerNumber();
-            if (cn >= 16 && cn <= 24)
+            if (cn >= 16 && cn < 24)
             {
                 float cv = msg.getControllerValue() / 127.0f;
                 synth.setDrawBar(cn - 16, cv);
+                sendChangeMessage();
+            }
+            else if (cn == 24)
+            {
+                float cv = msg.getControllerValue() / 127.0f;
+                synth.setMasterVolume(cv);
+                sendChangeMessage();
             }
         }
     }
@@ -190,15 +197,34 @@ AudioProcessorEditor* MyOrganAudioProcessor::createEditor()
 
 void MyOrganAudioProcessor::getStateInformation (MemoryBlock& destData)
 {
-    // You should use this method to store your parameters in the memory block.
-    // You could do that either as raw data, or use the XML or ValueTree classes
-    // as intermediaries to make it easy to save and load complex data.
+    XmlElement xml = XmlElement("myOrgan");
+    xml.setAttribute("masterVol", synth.getMasterVolume());
+    xml.setAttribute("drawBar0", synth.getDrawBar(0));
+    xml.setAttribute("drawBar1", synth.getDrawBar(1));
+    xml.setAttribute("drawBar2", synth.getDrawBar(2));
+    xml.setAttribute("drawBar3", synth.getDrawBar(3));
+    xml.setAttribute("drawBar4", synth.getDrawBar(4));
+    xml.setAttribute("drawBar5", synth.getDrawBar(5));
+    xml.setAttribute("drawBar6", synth.getDrawBar(6));
+    xml.setAttribute("drawBar7", synth.getDrawBar(7));
+    xml.setAttribute("drawBar8", synth.getDrawBar(8));
+    copyXmlToBinary(xml, destData);
 }
 
 void MyOrganAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
-    // You should use this method to restore your parameters from this memory block,
-    // whose contents will have been created by the getStateInformation() call.
+    ScopedPointer<XmlElement> xml = getXmlFromBinary(data, sizeInBytes);
+    synth.setMasterVolume(float(xml->getDoubleAttribute("masterVol", 1.0)));
+    synth.setDrawBar(0, float(xml->getDoubleAttribute("drawBar0", 1.0)));
+    synth.setDrawBar(1, float(xml->getDoubleAttribute("drawBar1", 0.0)));
+    synth.setDrawBar(2, float(xml->getDoubleAttribute("drawBar2", 0.0)));
+    synth.setDrawBar(3, float(xml->getDoubleAttribute("drawBar3", 0.0)));
+    synth.setDrawBar(4, float(xml->getDoubleAttribute("drawBar4", 0.0)));
+    synth.setDrawBar(5, float(xml->getDoubleAttribute("drawBar5", 0.0)));
+    synth.setDrawBar(6, float(xml->getDoubleAttribute("drawBar6", 0.0)));
+    synth.setDrawBar(7, float(xml->getDoubleAttribute("drawBar7", 0.0)));
+    synth.setDrawBar(8, float(xml->getDoubleAttribute("drawBar8", 0.0)));
+    sendChangeMessage();
 }
 
 AudioProcessor* JUCE_CALLTYPE createPluginFilter()

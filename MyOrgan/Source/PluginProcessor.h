@@ -2,7 +2,8 @@
 #include "JuceHeader.h"
 #include "MyAKCoreSynth.hpp"
 
-class MyOrganAudioProcessor  : public AudioProcessor
+class MyOrganAudioProcessor :   public AudioProcessor,
+                                public ChangeBroadcaster
 {
 public:
     MyOrganAudioProcessor();

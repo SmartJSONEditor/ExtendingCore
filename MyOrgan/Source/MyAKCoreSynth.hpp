@@ -32,6 +32,7 @@ public:
     void stopNote(unsigned noteNumber, bool immediate);
     void sustainPedal(bool down);
     void setMasterVolume(float vol) { masterVolume = vol; }
+    float getMasterVolume() { return masterVolume; }
     void setPitchOffset(float offset) { pitchOffset = offset; }
     void setVibratoDepth(float depth) { vibratoDepth = depth; }
     
