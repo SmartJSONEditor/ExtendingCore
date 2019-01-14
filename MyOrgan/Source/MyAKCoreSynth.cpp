@@ -34,11 +34,11 @@ struct MyAKCoreSynth::InternalData
 };
 
 MyAKCoreSynth::MyAKCoreSynth()
-: eventCounter(0)
+: data(new InternalData)
+, eventCounter(0)
 , masterVolume(1.0f)
 , pitchOffset(0.0f)
 , vibratoDepth(0.0f)
-, data(new InternalData)
 {
     for (int i=0; i < MAX_VOICE_COUNT; i++)
     {
@@ -68,7 +68,10 @@ int MyAKCoreSynth::init(double sampleRate)
     
     memset(data->voiceParameters.organ.drawbars, 0, 16 * sizeof(float));
     data->voiceParameters.organ.drawbars[0] = 1.0f;
-    data->voiceParameters.organ.mixLevel = 1.0f;
+    data->voiceParameters.organ.mixLevel = 0.4f;
+
+    data->ampEGParameters.setAttackDurationSeconds(0.01f);
+    data->ampEGParameters.setReleaseDurationSeconds(0.01f);
 
     for (int i=0; i < MAX_VOICE_COUNT; i++)
     {
