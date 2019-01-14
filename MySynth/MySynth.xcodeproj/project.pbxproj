@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		34345FC921EC13F600A38C22 /* MySynthVoice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34345FC621EC13F500A38C22 /* MySynthVoice.cpp */; };
+		34345FCA21EC13F600A38C22 /* MyAKCoreSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34345FC721EC13F600A38C22 /* MyAKCoreSynth.cpp */; };
 		349FA6BE21EA4ECA00B42EAC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349FA6BD21EA4ECA00B42EAC /* AppDelegate.swift */; };
 		349FA6C021EA4ECA00B42EAC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349FA6BF21EA4ECA00B42EAC /* ViewController.swift */; };
 		349FA6C221EA4ECA00B42EAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 349FA6C121EA4ECA00B42EAC /* Assets.xcassets */; };
@@ -51,6 +53,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		34345FC521EC13F500A38C22 /* MyAKCoreSynth.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MyAKCoreSynth.hpp; sourceTree = "<group>"; };
+		34345FC621EC13F500A38C22 /* MySynthVoice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MySynthVoice.cpp; sourceTree = "<group>"; };
+		34345FC721EC13F600A38C22 /* MyAKCoreSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyAKCoreSynth.cpp; sourceTree = "<group>"; };
+		34345FC821EC13F600A38C22 /* MySynthVoice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MySynthVoice.hpp; sourceTree = "<group>"; };
 		349FA6BA21EA4ECA00B42EAC /* MySynth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MySynth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		349FA6BD21EA4ECA00B42EAC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		349FA6BF21EA4ECA00B42EAC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +133,10 @@
 		349FA6D521EA565C00B42EAC /* MyAKSynth Node */ = {
 			isa = PBXGroup;
 			children = (
+				34345FC721EC13F600A38C22 /* MyAKCoreSynth.cpp */,
+				34345FC521EC13F500A38C22 /* MyAKCoreSynth.hpp */,
+				34345FC621EC13F500A38C22 /* MySynthVoice.cpp */,
+				34345FC821EC13F600A38C22 /* MySynthVoice.hpp */,
 				349FA6D421EA554A00B42EAC /* MySynth-Bridging-Header.h */,
 				349FA6D921EA56C900B42EAC /* MyAKSynth.swift */,
 				349FA6D721EA56C900B42EAC /* MyAKSynthAudioUnit.swift */,
@@ -247,6 +257,8 @@
 			files = (
 				349FA6C021EA4ECA00B42EAC /* ViewController.swift in Sources */,
 				349FA6DE21EA5BCA00B42EAC /* Conductor.swift in Sources */,
+				34345FC921EC13F600A38C22 /* MySynthVoice.cpp in Sources */,
+				34345FCA21EC13F600A38C22 /* MyAKCoreSynth.cpp in Sources */,
 				349FA6DB21EA56C900B42EAC /* MyAKSynthAudioUnit.swift in Sources */,
 				349FA6DC21EA56C900B42EAC /* MyAKSynth.swift in Sources */,
 				349FA6DA21EA56C900B42EAC /* MyAKSynthDSP.mm in Sources */,

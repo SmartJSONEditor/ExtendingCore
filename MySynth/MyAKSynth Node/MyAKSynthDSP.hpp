@@ -47,10 +47,10 @@ void doMyAKSynthSustainPedal(AKDSPRef pDSP, bool pedalDown);
 #else
 
 #import "AKDSPBase.hpp"
-#include "AKCoreSynth.hpp"
+#include "MyAKCoreSynth.hpp"
 #import "AKLinearParameterRamp.hpp"
 
-struct MyAKSynthDSP : AKDSPBase, AKCoreSynth
+struct MyAKSynthDSP : AKDSPBase, MyAKCoreSynth
 {
     // ramped parameters
     AKLinearParameterRamp masterVolumeRamp;

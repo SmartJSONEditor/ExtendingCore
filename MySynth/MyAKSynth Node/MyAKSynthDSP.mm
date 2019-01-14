@@ -29,7 +29,7 @@ extern "C" void doMyAKSynthSustainPedal(void *pDSP, bool pedalDown)
 }
 
 
-MyAKSynthDSP::MyAKSynthDSP() : AKCoreSynth()
+MyAKSynthDSP::MyAKSynthDSP() : MyAKCoreSynth()
 {
     masterVolumeRamp.setTarget(1.0, true);
     pitchBendRamp.setTarget(0.0, true);
@@ -41,12 +41,12 @@ MyAKSynthDSP::MyAKSynthDSP() : AKCoreSynth()
 void MyAKSynthDSP::init(int channelCount, double sampleRate)
 {
     AKDSPBase::init(channelCount, sampleRate);
-    AKCoreSynth::init(sampleRate);
+    MyAKCoreSynth::init(sampleRate);
 }
 
 void MyAKSynthDSP::deinit()
 {
-    AKCoreSynth::deinit();
+    MyAKCoreSynth::deinit();
 }
 
 void MyAKSynthDSP::setParameter(uint64_t address, float value, bool immediate)
@@ -174,6 +174,6 @@ void MyAKSynthDSP::process(AUAudioFrameCount frameCount, AUAudioFrameCount buffe
         outBuffers[0] = (float *)outBufferListPtr->mBuffers[0].mData + frameOffset;
         outBuffers[1] = (float *)outBufferListPtr->mBuffers[1].mData + frameOffset;
         unsigned channelCount = outBufferListPtr->mNumberBuffers;
-        AKCoreSynth::render(channelCount, chunkSize, outBuffers);
+        MyAKCoreSynth::render(channelCount, chunkSize, outBuffers);
     }
 }
