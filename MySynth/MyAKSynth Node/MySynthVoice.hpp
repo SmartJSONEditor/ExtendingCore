@@ -57,11 +57,7 @@ namespace AudioKitCore
         void stop(unsigned evt);
 
         // return true if amp envelope is finished
-        bool prepToGetSamples(float masterVol,
-                              float phaseDeltaMultiplier,
-                              float cutoffMultiple,
-                              float cutoffStrength,
-                              float resLinear);
+        bool prepToGetSamples(float masterVol, float phaseDeltaMultiplier);
         bool getSamples(int sampleCount, float *leftOuput, float *rightOutput);
     };
 }

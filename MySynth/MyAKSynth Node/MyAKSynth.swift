@@ -24,6 +24,23 @@ import AudioKit
     fileprivate var pitchBendParameter: AUParameter?
     fileprivate var vibratoDepthParameter: AUParameter?
 
+    fileprivate var drawbar1LevelParameter: AUParameter?
+    fileprivate var drawbar2LevelParameter: AUParameter?
+    fileprivate var drawbar3LevelParameter: AUParameter?
+    fileprivate var drawbar4LevelParameter: AUParameter?
+    fileprivate var drawbar5LevelParameter: AUParameter?
+    fileprivate var drawbar6LevelParameter: AUParameter?
+    fileprivate var drawbar7LevelParameter: AUParameter?
+    fileprivate var drawbar8LevelParameter: AUParameter?
+    fileprivate var drawbar9LevelParameter: AUParameter?
+    fileprivate var drawbar10LevelParameter: AUParameter?
+    fileprivate var drawbar11LevelParameter: AUParameter?
+    fileprivate var drawbar12LevelParameter: AUParameter?
+    fileprivate var drawbar13LevelParameter: AUParameter?
+    fileprivate var drawbar14LevelParameter: AUParameter?
+    fileprivate var drawbar15LevelParameter: AUParameter?
+    fileprivate var drawbar16LevelParameter: AUParameter?
+
     fileprivate var attackDurationParameter: AUParameter?
     fileprivate var decayDurationParameter: AUParameter?
     fileprivate var sustainLevelParameter: AUParameter?
@@ -81,6 +98,262 @@ import AudioKit
             }
 
             internalAU?.vibratoDepth = newValue
+        }
+    }
+
+    /// Drawbar 1 level (fraction)
+    @objc open dynamic var drawbar1: Double = 1.0 {
+        willSet {
+            guard drawbar1 != newValue else { return }
+
+            if internalAU?.isSetUp ?? false {
+                if token != nil && drawbar1LevelParameter != nil {
+                    drawbar1LevelParameter?.setValue(Float(newValue), originator: token!)
+                    return
+                }
+            }
+
+            internalAU?.drawbar1 = newValue
+        }
+    }
+
+    /// Drawbar 2 level (fraction)
+    @objc open dynamic var drawbar2: Double = 0.0 {
+        willSet {
+            guard drawbar2 != newValue else { return }
+
+            if internalAU?.isSetUp ?? false {
+                if token != nil && drawbar2LevelParameter != nil {
+                    drawbar2LevelParameter?.setValue(Float(newValue), originator: token!)
+                    return
+                }
+            }
+
+            internalAU?.drawbar2 = newValue
+        }
+    }
+
+    /// Drawbar 3 level (fraction)
+    @objc open dynamic var drawbar3: Double = 0.0 {
+        willSet {
+            guard drawbar3 != newValue else { return }
+
+            if internalAU?.isSetUp ?? false {
+                if token != nil && drawbar3LevelParameter != nil {
+                    drawbar3LevelParameter?.setValue(Float(newValue), originator: token!)
+                    return
+                }
+            }
+
+            internalAU?.drawbar3 = newValue
+        }
+    }
+
+    /// Drawbar 4 level (fraction)
+    @objc open dynamic var drawbar4: Double = 0.0 {
+        willSet {
+            guard drawbar4 != newValue else { return }
+
+            if internalAU?.isSetUp ?? false {
+                if token != nil && drawbar4LevelParameter != nil {
+                    drawbar4LevelParameter?.setValue(Float(newValue), originator: token!)
+                    return
+                }
+            }
+
+            internalAU?.drawbar4 = newValue
+        }
+    }
+
+    /// Drawbar 5 level (fraction)
+    @objc open dynamic var drawbar5: Double = 0.0 {
+        willSet {
+            guard drawbar5 != newValue else { return }
+
+            if internalAU?.isSetUp ?? false {
+                if token != nil && drawbar5LevelParameter != nil {
+                    drawbar5LevelParameter?.setValue(Float(newValue), originator: token!)
+                    return
+                }
+            }
+
+            internalAU?.drawbar5 = newValue
+        }
+    }
+
+    /// Drawbar 6 level (fraction)
+    @objc open dynamic var drawbar6: Double = 0.0 {
+        willSet {
+            guard drawbar6 != newValue else { return }
+
+            if internalAU?.isSetUp ?? false {
+                if token != nil && drawbar6LevelParameter != nil {
+                    drawbar6LevelParameter?.setValue(Float(newValue), originator: token!)
+                    return
+                }
+            }
+
+            internalAU?.drawbar6 = newValue
+        }
+    }
+
+    /// Drawbar 7 level (fraction)
+    @objc open dynamic var drawbar7: Double = 0.0 {
+        willSet {
+            guard drawbar7 != newValue else { return }
+
+            if internalAU?.isSetUp ?? false {
+                if token != nil && drawbar7LevelParameter != nil {
+                    drawbar7LevelParameter?.setValue(Float(newValue), originator: token!)
+                    return
+                }
+            }
+
+            internalAU?.drawbar7 = newValue
+        }
+    }
+
+    /// Drawbar 8 level (fraction)
+    @objc open dynamic var drawbar8: Double = 0.0 {
+        willSet {
+            guard drawbar8 != newValue else { return }
+
+            if internalAU?.isSetUp ?? false {
+                if token != nil && drawbar8LevelParameter != nil {
+                    drawbar8LevelParameter?.setValue(Float(newValue), originator: token!)
+                    return
+                }
+            }
+
+            internalAU?.drawbar8 = newValue
+        }
+    }
+
+    /// Drawbar 9 level (fraction)
+    @objc open dynamic var drawbar9: Double = 0.0 {
+        willSet {
+            guard drawbar9 != newValue else { return }
+
+            if internalAU?.isSetUp ?? false {
+                if token != nil && drawbar9LevelParameter != nil {
+                    drawbar9LevelParameter?.setValue(Float(newValue), originator: token!)
+                    return
+                }
+            }
+
+            internalAU?.drawbar9 = newValue
+        }
+    }
+
+    /// Drawbar 10 level (fraction)
+    @objc open dynamic var drawbar10: Double = 0.0 {
+        willSet {
+            guard drawbar10 != newValue else { return }
+
+            if internalAU?.isSetUp ?? false {
+                if token != nil && drawbar10LevelParameter != nil {
+                    drawbar10LevelParameter?.setValue(Float(newValue), originator: token!)
+                    return
+                }
+            }
+
+            internalAU?.drawbar10 = newValue
+        }
+    }
+
+    /// Drawbar 11 level (fraction)
+    @objc open dynamic var drawbar11: Double = 0.0 {
+        willSet {
+            guard drawbar11 != newValue else { return }
+
+            if internalAU?.isSetUp ?? false {
+                if token != nil && drawbar11LevelParameter != nil {
+                    drawbar11LevelParameter?.setValue(Float(newValue), originator: token!)
+                    return
+                }
+            }
+
+            internalAU?.drawbar11 = newValue
+        }
+    }
+
+    /// Drawbar 12 level (fraction)
+    @objc open dynamic var drawbar12: Double = 0.0 {
+        willSet {
+            guard drawbar12 != newValue else { return }
+
+            if internalAU?.isSetUp ?? false {
+                if token != nil && drawbar12LevelParameter != nil {
+                    drawbar12LevelParameter?.setValue(Float(newValue), originator: token!)
+                    return
+                }
+            }
+
+            internalAU?.drawbar12 = newValue
+        }
+    }
+
+    /// Drawbar 13 level (fraction)
+    @objc open dynamic var drawbar13: Double = 0.0 {
+        willSet {
+            guard drawbar13 != newValue else { return }
+
+            if internalAU?.isSetUp ?? false {
+                if token != nil && drawbar13LevelParameter != nil {
+                    drawbar13LevelParameter?.setValue(Float(newValue), originator: token!)
+                    return
+                }
+            }
+
+            internalAU?.drawbar13 = newValue
+        }
+    }
+
+    /// Drawbar 14 level (fraction)
+    @objc open dynamic var drawbar14: Double = 0.0 {
+        willSet {
+            guard drawbar14 != newValue else { return }
+
+            if internalAU?.isSetUp ?? false {
+                if token != nil && drawbar14LevelParameter != nil {
+                    drawbar14LevelParameter?.setValue(Float(newValue), originator: token!)
+                    return
+                }
+            }
+
+            internalAU?.drawbar14 = newValue
+        }
+    }
+
+    /// Drawbar 15 level (fraction)
+    @objc open dynamic var drawbar15: Double = 0.0 {
+        willSet {
+            guard drawbar15 != newValue else { return }
+
+            if internalAU?.isSetUp ?? false {
+                if token != nil && drawbar15LevelParameter != nil {
+                    drawbar15LevelParameter?.setValue(Float(newValue), originator: token!)
+                    return
+                }
+            }
+
+            internalAU?.drawbar15 = newValue
+        }
+    }
+
+    /// Drawbar 16 level (fraction)
+    @objc open dynamic var drawbar16: Double = 0.0 {
+        willSet {
+            guard drawbar16 != newValue else { return }
+
+            if internalAU?.isSetUp ?? false {
+                if token != nil && drawbar16LevelParameter != nil {
+                    drawbar16LevelParameter?.setValue(Float(newValue), originator: token!)
+                    return
+                }
+            }
+
+            internalAU?.drawbar16 = newValue
         }
     }
 

@@ -30,6 +30,7 @@ namespace AudioKitCore
         event = evt;
         noteVolume = volume;
         drawBarOsc.setFrequency(frequency);
+        drawBarOsc.setDrawbars(pParameters->organ.drawbars);
         ampEG.start();
 
         noteFrequency = frequency;
@@ -66,11 +67,7 @@ namespace AudioKitCore
         ampEG.reset();
     }
 
-    bool MySynthVoice::prepToGetSamples(float masterVolume,
-                                        float phaseDeltaMultiplier,
-                                        float cutoffMultiple,
-                                        float cutoffStrength,
-                                        float resLinear)
+    bool MySynthVoice::prepToGetSamples(float masterVolume, float phaseDeltaMultiplier)
     {
         if (ampEG.isIdle()) return true;
 

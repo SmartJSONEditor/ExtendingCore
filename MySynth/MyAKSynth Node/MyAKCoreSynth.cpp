@@ -38,9 +38,6 @@ MyAKCoreSynth::MyAKCoreSynth()
 , masterVolume(1.0f)
 , pitchOffset(0.0f)
 , vibratoDepth(0.0f)
-, cutoffMultiple(4.0f)
-, cutoffEnvelopeStrength(20.0f)
-, linearResonance(1.0f)
 , data(new InternalData)
 {
     for (int i=0; i < MAX_VOICE_COUNT; i++)
@@ -69,13 +66,13 @@ int MyAKCoreSynth::init(double sampleRate)
     data->vibratoLFO.waveTable.sinusoid();
     data->vibratoLFO.init(sampleRate/AKSYNTH_CHUNKSIZE, 5.0f);
     
-    data->voiceParameters.organ.drawbars[0] = 0.8f;
+    data->voiceParameters.organ.drawbars[0] = 1.0f;
     data->voiceParameters.organ.drawbars[1] = 0.0f;
     data->voiceParameters.organ.drawbars[2] = 0.0f;
     data->voiceParameters.organ.drawbars[3] = 0.0f;
     data->voiceParameters.organ.drawbars[4] = 0.0f;
     data->voiceParameters.organ.drawbars[5] = 0.0f;
-    data->voiceParameters.organ.drawbars[6] = 0.2f;
+    data->voiceParameters.organ.drawbars[6] = 0.0f;
     data->voiceParameters.organ.drawbars[7] = 0.0f;
     data->voiceParameters.organ.drawbars[8] = 0.0f;
     data->voiceParameters.organ.drawbars[8] = 0.0f;
@@ -235,7 +232,7 @@ void MyAKCoreSynth::render(unsigned channelCount, unsigned sampleCount, float *o
         int nn = pVoice->noteNumber;
         if (nn >= 0)
         {
-            if (pVoice->prepToGetSamples(masterVolume, phaseDeltaMultiplier, cutoffMultiple, cutoffEnvelopeStrength, linearResonance) ||
+            if (pVoice->prepToGetSamples(masterVolume, phaseDeltaMultiplier) ||
                 pVoice->getSamples(sampleCount, pOutLeft, pOutRight))
             {
                 stopNote(nn, true);
@@ -280,4 +277,14 @@ void  MyAKCoreSynth::setAmpReleaseDurationSeconds(float value)
 float MyAKCoreSynth::getAmpReleaseDurationSeconds(void)
 {
     return data->ampEGParameters.getReleaseDurationSeconds();
+}
+
+void MyAKCoreSynth::setDrawBar(int index, float value)
+{
+    data->voiceParameters.organ.drawbars[index] = value;
+}
+
+float MyAKCoreSynth::getDrawBar(int index)
+{
+    return data->voiceParameters.organ.drawbars[index];
 }

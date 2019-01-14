@@ -40,6 +40,9 @@ public:
     float getAmpSustainFraction(void);
     void  setAmpReleaseDurationSeconds(float value);
     float getAmpReleaseDurationSeconds(void);
+
+    void setDrawBar(int index, float value);
+    float getDrawBar(int index);
     
     void render(unsigned channelCount, unsigned sampleCount, float *outBuffers[]);
     
@@ -53,17 +56,6 @@ protected:
     
     // performance parameters
     float masterVolume, pitchOffset, vibratoDepth;
-    
-    // filter parameters
-    
-    /// multiple of note frequency - 1.0 means cutoff at fundamental
-    float cutoffMultiple;
-    
-    /// how much filter EG adds on top of cutoffMultiple
-    float cutoffEnvelopeStrength;
-    
-    /// resonance [-20 dB, +20 dB] becomes linear [10.0, 0.1]
-    float linearResonance;
     
     void play(unsigned noteNumber, unsigned velocity, float noteFrequency);
     void stop(unsigned noteNumber, bool immediate);

@@ -60,6 +60,9 @@ class Conductor {
         synth.sustainLevel = 0.8
         synth.releaseDuration = 0.25
         synth.vibratoDepth = 0.0
+
+        synth.drawbar1 = 0.99
+        synth.drawbar2 = 0.0
     }
 
     func addMIDIListener(_ listener: AKMIDIListener) {

@@ -66,6 +66,25 @@ void MyAKSynthDSP::setParameter(uint64_t address, float value, bool immediate)
             vibratoDepthRamp.setTarget(value, immediate);
             break;
 
+        case MyAKSynthParameterDrawbar1:
+        case MyAKSynthParameterDrawbar2:
+        case MyAKSynthParameterDrawbar3:
+        case MyAKSynthParameterDrawbar4:
+        case MyAKSynthParameterDrawbar5:
+        case MyAKSynthParameterDrawbar6:
+        case MyAKSynthParameterDrawbar7:
+        case MyAKSynthParameterDrawbar8:
+        case MyAKSynthParameterDrawbar9:
+        case MyAKSynthParameterDrawbar10:
+        case MyAKSynthParameterDrawbar11:
+        case MyAKSynthParameterDrawbar12:
+        case MyAKSynthParameterDrawbar13:
+        case MyAKSynthParameterDrawbar14:
+        case MyAKSynthParameterDrawbar15:
+        case MyAKSynthParameterDrawbar16:
+            drawbarRamp[address - MyAKSynthParameterDrawbar1].setTarget(value, immediate);
+            break;
+
         case MyAKSynthParameterAttackDuration:
             setAmpAttackDurationSeconds(value);
             break;
@@ -94,6 +113,24 @@ float MyAKSynthDSP::getParameter(uint64_t address)
         case MyAKSynthParameterVibratoDepth:
             return vibratoDepthRamp.getTarget();
 
+        case MyAKSynthParameterDrawbar1:
+        case MyAKSynthParameterDrawbar2:
+        case MyAKSynthParameterDrawbar3:
+        case MyAKSynthParameterDrawbar4:
+        case MyAKSynthParameterDrawbar5:
+        case MyAKSynthParameterDrawbar6:
+        case MyAKSynthParameterDrawbar7:
+        case MyAKSynthParameterDrawbar8:
+        case MyAKSynthParameterDrawbar9:
+        case MyAKSynthParameterDrawbar10:
+        case MyAKSynthParameterDrawbar11:
+        case MyAKSynthParameterDrawbar12:
+        case MyAKSynthParameterDrawbar13:
+        case MyAKSynthParameterDrawbar14:
+        case MyAKSynthParameterDrawbar15:
+        case MyAKSynthParameterDrawbar16:
+            return drawbarRamp[address - MyAKSynthParameterDrawbar1].getTarget();
+
         case MyAKSynthParameterAttackDuration:
             return getAmpAttackDurationSeconds();
         case MyAKSynthParameterDecayDuration:
@@ -121,6 +158,11 @@ void MyAKSynthDSP::process(AUAudioFrameCount frameCount, AUAudioFrameCount buffe
         pitchOffset = (float)pitchBendRamp.getValue();
         vibratoDepthRamp.advanceTo(now + frameOffset);
         vibratoDepth = (float)vibratoDepthRamp.getValue();
+        for (int i = 0; i < 16; i++)
+        {
+            drawbarRamp[i].advanceTo(now + frameOffset);
+            setDrawBar(i, (float)drawbarRamp[i].getValue());
+        }
 
         // get data
         float *outBuffers[2];
