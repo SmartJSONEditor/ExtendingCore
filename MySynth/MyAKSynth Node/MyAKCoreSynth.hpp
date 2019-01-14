@@ -41,15 +41,6 @@ public:
     void  setAmpReleaseDurationSeconds(float value);
     float getAmpReleaseDurationSeconds(void);
     
-    void  setFilterAttackDurationSeconds(float value);
-    float getFilterAttackDurationSeconds(void);
-    void  setFilterDecayDurationSeconds(float value);
-    float getFilterDecayDurationSeconds(void);
-    void  setFilterSustainFraction(float value);
-    float getFilterSustainFraction(void);
-    void  setFilterReleaseDurationSeconds(float value);
-    float getFilterReleaseDurationSeconds(void);
-    
     void render(unsigned channelCount, unsigned sampleCount, float *outBuffers[]);
     
 protected:

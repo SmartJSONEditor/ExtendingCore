@@ -12,49 +12,25 @@
 namespace AudioKitCore
 {
     void MySynthVoice::init(double sampleRate,
-                            WaveStack *pOsc1Stack,
-                            WaveStack *pOsc2Stack,
-                            WaveStack *pOsc3Stack,
-                            MySynthVoiceParameters *pParams,
-                            EnvelopeParameters *pEnvParameters)
+                            WaveStack *pOscStack,
+                            MySynthVoiceParameters *pParams)
     {
         pParameters = pParams;
         event = 0;
         noteNumber = -1;
 
-        osc1.init(sampleRate, pOsc1Stack);
-        osc1.setPhases(pParameters->osc1.phases);
-        osc1.setFreqSpread(pParameters->osc1.frequencySpread);
-        osc1.setPanSpread(pParameters->osc1.panSpread);
-
-        osc2.init(sampleRate, pOsc2Stack);
-        osc2.setPhases(pParameters->osc2.phases);
-        osc2.setFreqSpread(pParameters->osc2.frequencySpread);
-        osc2.setPanSpread(pParameters->osc2.panSpread);
-
-        osc3.init(sampleRate, pOsc3Stack);
-        osc3.setDrawbars(pParameters->osc3.drawbars);
-
-        leftFilter.init(sampleRate);
-        rightFilter.init(sampleRate);
-        leftFilter.setStages(pParameters->filterStages);
-        rightFilter.setStages(pParameters->filterStages);
+        drawBarOsc.init(sampleRate, pOscStack);
+        drawBarOsc.setDrawbars(pParameters->organ.drawbars);
 
         ampEG.init();
-        filterEG.init();
-        pumpEG.init(pEnvParameters);
     }
 
     void MySynthVoice::start(unsigned evt, unsigned noteNumber, float frequency, float volume)
     {
         event = evt;
         noteVolume = volume;
-        osc1.setFrequency(frequency * pow(2.0f, pParameters->osc1.pitchOffset / 12.0f));
-        osc2.setFrequency(frequency * pow(2.0f, pParameters->osc2.pitchOffset / 12.0f));
-        osc3.setFrequency(frequency);
+        drawBarOsc.setFrequency(frequency);
         ampEG.start();
-        filterEG.start();
-        pumpEG.start();
 
         noteFrequency = frequency;
         this->noteNumber = noteNumber;
@@ -66,7 +42,6 @@ namespace AudioKitCore
         newNoteNumber = -1;
         newNoteVol = volume;
         ampEG.restart();
-        pumpEG.restart();
     }
 
     void MySynthVoice::restart(unsigned evt, unsigned noteNumber, float frequency, float volume)
@@ -76,15 +51,12 @@ namespace AudioKitCore
         newNoteVol = volume;
         noteFrequency = frequency;
         ampEG.restart();
-        pumpEG.restart();
     }
 
     void MySynthVoice::release(unsigned evt)
     {
         event = evt;
         ampEG.release();
-        filterEG.release();
-        pumpEG.release();
     }
 
     void MySynthVoice::stop(unsigned evt)
@@ -92,8 +64,6 @@ namespace AudioKitCore
         event = evt;
         noteNumber = -1;
         ampEG.reset();
-        filterEG.reset();
-        pumpEG.reset();
     }
 
     bool MySynthVoice::prepToGetSamples(float masterVolume,
@@ -116,33 +86,16 @@ namespace AudioKitCore
                 if (newNoteNumber >= 0)
                 {
                     // restarting a "stolen" voice with a new note number
-                    osc1.setFrequency(noteFrequency * pow(2.0f, pParameters->osc1.pitchOffset / 12.0f));
-                    osc2.setFrequency(noteFrequency * pow(2.0f, pParameters->osc2.pitchOffset / 12.0f));
-                    osc3.setFrequency(noteFrequency);
+                    drawBarOsc.setFrequency(noteFrequency);
                     noteNumber = newNoteNumber;
                 }
                 ampEG.start();
-                filterEG.start();
-                pumpEG.start();
             }
         }
         else
             tempGain = masterVolume * noteVolume * ampEG.getSample();
 
-#if 0
-        // pumping effect using multi-segment EG
-        float pump = pumpEG.getSample();
-        double cutoffFrequency = noteFrequency * (1.0f + cutoffMultiple + cutoffStrength * pump);
-#else
-        // standard ADSR EG
-        double cutoffFrequency = noteFrequency * (1.0f + cutoffMultiple + cutoffStrength * filterEG.getSample());
-#endif
-        leftFilter.setParameters(cutoffFrequency, resLinear);
-        rightFilter.setParameters(cutoffFrequency, resLinear);
-
-        osc1.phaseDeltaMultiplier = phaseDeltaMultiplier;
-        osc2.phaseDeltaMultiplier = phaseDeltaMultiplier;
-        osc3.phaseDeltaMultiplier = phaseDeltaMultiplier;
+        drawBarOsc.phaseDeltaMultiplier = phaseDeltaMultiplier;
 
         return false;
     }
@@ -153,20 +106,9 @@ namespace AudioKitCore
         {
             float leftSample = 0.0f;
             float rightSample = 0.0f;
-            //osc1.getSamples(&leftSample, &rightSample, pParameters->osc1.mixLevel);
-            //osc2.getSamples(&leftSample, &rightSample, pParameters->osc2.mixLevel);
-            osc3.getSamples(&leftSample, &rightSample, pParameters->osc3.mixLevel);
-
-            if (pParameters->filterStages == 0)
-            {
-                *leftOutput++ += tempGain * leftSample;
-                *rightOutput++ += tempGain * rightSample;
-            }
-            else
-            {
-                *leftOutput++ += leftFilter.process(tempGain * leftSample);
-                *rightOutput++ += rightFilter.process(tempGain * rightSample);
-            }
+            drawBarOsc.getSamples(&leftSample, &rightSample, pParameters->organ.mixLevel);
+            *leftOutput++ += tempGain * leftSample;
+            *rightOutput++ += tempGain * rightSample;
         }
         return false;
     }

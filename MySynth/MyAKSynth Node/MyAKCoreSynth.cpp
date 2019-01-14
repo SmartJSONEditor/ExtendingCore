@@ -23,7 +23,7 @@ struct MyAKCoreSynth::InternalData
     /// array of voice resources
     AudioKitCore::MySynthVoice voice[MAX_VOICE_COUNT];
     
-    AudioKitCore::WaveStack waveform1, waveform2, waveform3;      // WaveStacks are shared by all voice oscillators
+    AudioKitCore::WaveStack waveform;                             // WaveStacks are shared by all voice oscillators
     AudioKitCore::FunctionTableOscillator vibratoLFO;             // one vibrato LFO shared by all voices
     AudioKitCore::SustainPedalLogic pedalLogic;
     
@@ -31,9 +31,6 @@ struct MyAKCoreSynth::InternalData
     AudioKitCore::MySynthVoiceParameters voiceParameters;
     AudioKitCore::ADSREnvelopeParameters ampEGParameters;
     AudioKitCore::ADSREnvelopeParameters filterEGParameters;
-    
-    AudioKitCore::EnvelopeSegmentParameters segParameters[8];
-    AudioKitCore::EnvelopeParameters envParameters;
 };
 
 MyAKCoreSynth::MyAKCoreSynth()
@@ -51,7 +48,6 @@ MyAKCoreSynth::MyAKCoreSynth()
         data->voice[i].event = 0;
         data->voice[i].noteNumber = -1;
         data->voice[i].ampEG.pParameters = &data->ampEGParameters;
-        data->voice[i].filterEG.pParameters = &data->filterEGParameters;
     }
 }
 
@@ -64,12 +60,8 @@ int MyAKCoreSynth::init(double sampleRate)
     AudioKitCore::FunctionTable waveform;
     int length = 1 << AudioKitCore::WaveStack::maxBits;
     waveform.init(length);
-    waveform.sawtooth(0.2f);
-    data->waveform1.initStack(waveform.pWaveTable);
-    waveform.square(0.4f, 0.01f);
-    data->waveform2.initStack(waveform.pWaveTable);
     waveform.triangle(0.5f);
-    data->waveform3.initStack(waveform.pWaveTable);
+    data->waveform.initStack(waveform.pWaveTable);
     
     data->ampEGParameters.updateSampleRate((float)(sampleRate/AKSYNTH_CHUNKSIZE));
     data->filterEGParameters.updateSampleRate((float)(sampleRate/AKSYNTH_CHUNKSIZE));
@@ -77,62 +69,27 @@ int MyAKCoreSynth::init(double sampleRate)
     data->vibratoLFO.waveTable.sinusoid();
     data->vibratoLFO.init(sampleRate/AKSYNTH_CHUNKSIZE, 5.0f);
     
-    data->voiceParameters.osc1.phases = 4;
-    data->voiceParameters.osc1.frequencySpread = 25.0f;
-    data->voiceParameters.osc1.panSpread = 0.95f;
-    data->voiceParameters.osc1.pitchOffset = 0.0f;
-    data->voiceParameters.osc1.mixLevel = 0.7f;
-    
-    data->voiceParameters.osc2.phases = 2;
-    data->voiceParameters.osc2.frequencySpread = 15.0f;
-    data->voiceParameters.osc2.panSpread = 1.0f;
-    data->voiceParameters.osc2.pitchOffset = -12.0f;
-    data->voiceParameters.osc2.mixLevel = 0.6f;
-    
-    data->voiceParameters.osc3.drawbars[0] = 0.8f;
-    data->voiceParameters.osc3.drawbars[1] = 0.0f;
-    data->voiceParameters.osc3.drawbars[2] = 0.0f;
-    data->voiceParameters.osc3.drawbars[3] = 0.0f;
-    data->voiceParameters.osc3.drawbars[4] = 0.0f;
-    data->voiceParameters.osc3.drawbars[5] = 0.0f;
-    data->voiceParameters.osc3.drawbars[6] = 0.2f;
-    data->voiceParameters.osc3.drawbars[7] = 0.0f;
-    data->voiceParameters.osc3.drawbars[8] = 0.0f;
-    data->voiceParameters.osc3.drawbars[8] = 0.0f;
-    data->voiceParameters.osc3.drawbars[10] = 0.0f;
-    data->voiceParameters.osc3.drawbars[11] = 0.0f;
-    data->voiceParameters.osc3.drawbars[12] = 0.0f;
-    data->voiceParameters.osc3.drawbars[13] = 0.0f;
-    data->voiceParameters.osc3.drawbars[14] = 0.0f;
-    data->voiceParameters.osc3.drawbars[15] = 0.0f;
-    data->voiceParameters.osc3.mixLevel = 1.0f;
-    
-    data->voiceParameters.filterStages = 0;
-    
-    data->segParameters[0].initialLevel = 0.0f;   // attack: ramp quickly to 0.2
-    data->segParameters[0].finalLevel = 0.2f;
-    data->segParameters[0].seconds = 0.01f;
-    data->segParameters[1].initialLevel = 0.2f;   // hold at 0.2 for 1 sec
-    data->segParameters[1].finalLevel = 0.2;
-    data->segParameters[1].seconds = 1.0f;
-    data->segParameters[2].initialLevel = 0.2f;   // decay: fall to 0.0 in 0.5 sec
-    data->segParameters[2].finalLevel = 0.0f;
-    data->segParameters[2].seconds = 0.5f;
-    data->segParameters[3].initialLevel = 0.0f;   // sustain pump up: up to 1.0 in 0.1 sec
-    data->segParameters[3].finalLevel = 1.0f;
-    data->segParameters[3].seconds = 0.1f;
-    data->segParameters[4].initialLevel = 1.0f;   // sustain pump down: down to 0 again in 0.5 sec
-    data->segParameters[4].finalLevel = 0.0f;
-    data->segParameters[4].seconds = 0.5f;
-    data->segParameters[5].initialLevel = 0.0f;   // release: from wherever we leave off
-    data->segParameters[5].finalLevel = 0.0f;     // down to 0
-    data->segParameters[5].seconds = 0.5f;        // in 0.5 sec
-    
-    data->envParameters.init((float)(sampleRate/AKSYNTH_CHUNKSIZE), 6, data->segParameters, 3, 0, 5);
-    
+    data->voiceParameters.organ.drawbars[0] = 0.8f;
+    data->voiceParameters.organ.drawbars[1] = 0.0f;
+    data->voiceParameters.organ.drawbars[2] = 0.0f;
+    data->voiceParameters.organ.drawbars[3] = 0.0f;
+    data->voiceParameters.organ.drawbars[4] = 0.0f;
+    data->voiceParameters.organ.drawbars[5] = 0.0f;
+    data->voiceParameters.organ.drawbars[6] = 0.2f;
+    data->voiceParameters.organ.drawbars[7] = 0.0f;
+    data->voiceParameters.organ.drawbars[8] = 0.0f;
+    data->voiceParameters.organ.drawbars[8] = 0.0f;
+    data->voiceParameters.organ.drawbars[10] = 0.0f;
+    data->voiceParameters.organ.drawbars[11] = 0.0f;
+    data->voiceParameters.organ.drawbars[12] = 0.0f;
+    data->voiceParameters.organ.drawbars[13] = 0.0f;
+    data->voiceParameters.organ.drawbars[14] = 0.0f;
+    data->voiceParameters.organ.drawbars[15] = 0.0f;
+    data->voiceParameters.organ.mixLevel = 1.0f;
+
     for (int i=0; i < MAX_VOICE_COUNT; i++)
     {
-        data->voice[i].init(sampleRate, &data->waveform1, &data->waveform2, &data->waveform3, &data->voiceParameters, &data->envParameters);
+        data->voice[i].init(sampleRate, &data->waveform, &data->voiceParameters);
     }
     
     return 0;   // no error
@@ -323,41 +280,4 @@ void  MyAKCoreSynth::setAmpReleaseDurationSeconds(float value)
 float MyAKCoreSynth::getAmpReleaseDurationSeconds(void)
 {
     return data->ampEGParameters.getReleaseDurationSeconds();
-}
-
-void  MyAKCoreSynth::setFilterAttackDurationSeconds(float value)
-{
-    data->filterEGParameters.setAttackDurationSeconds(value);
-    for (int i = 0; i < MAX_VOICE_COUNT; i++) data->voice[i].updateFilterAdsrParameters();
-}
-float MyAKCoreSynth::getFilterAttackDurationSeconds(void)
-{
-    return data->filterEGParameters.getAttackDurationSeconds();
-}
-void  MyAKCoreSynth::setFilterDecayDurationSeconds(float value)
-{
-    data->filterEGParameters.setDecayDurationSeconds(value);
-    for (int i = 0; i < MAX_VOICE_COUNT; i++) data->voice[i].updateFilterAdsrParameters();
-}
-float MyAKCoreSynth::getFilterDecayDurationSeconds(void)
-{
-    return data->filterEGParameters.getDecayDurationSeconds();
-}
-void  MyAKCoreSynth::setFilterSustainFraction(float value)
-{
-    data->filterEGParameters.sustainFraction = value;
-    for (int i = 0; i < MAX_VOICE_COUNT; i++) data->voice[i].updateFilterAdsrParameters();
-}
-float MyAKCoreSynth::getFilterSustainFraction(void)
-{
-    return data->filterEGParameters.sustainFraction;
-}
-void  MyAKCoreSynth::setFilterReleaseDurationSeconds(float value)
-{
-    data->filterEGParameters.setReleaseDurationSeconds(value);
-    for (int i = 0; i < MAX_VOICE_COUNT; i++) data->voice[i].updateFilterAdsrParameters();
-}
-float MyAKCoreSynth::getFilterReleaseDurationSeconds(void)
-{
-    return data->filterEGParameters.getReleaseDurationSeconds();
 }

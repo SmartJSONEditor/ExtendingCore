@@ -59,12 +59,6 @@ class Conductor {
         synth.decayDuration = 0.01
         synth.sustainLevel = 0.8
         synth.releaseDuration = 0.25
-        synth.filterAttackDuration = 2.0
-        synth.filterDecayDuration = 2.0
-        synth.filterSustainLevel = 0.0
-        synth.filterReleaseDuration = 3.0
-        synth.filterCutoff = 0.0
-        synth.filterStrength = 20.0
         synth.vibratoDepth = 0.0
     }
 

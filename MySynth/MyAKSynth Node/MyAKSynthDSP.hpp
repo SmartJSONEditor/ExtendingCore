@@ -18,9 +18,6 @@ typedef NS_ENUM(AUParameterAddress, MyAKSynthParameter)
     MyAKSynthParameterMasterVolume,
     MyAKSynthParameterPitchBend,
     MyAKSynthParameterVibratoDepth,
-    MyAKSynthParameterFilterCutoff,
-    MyAKSynthParameterFilterStrength,
-    MyAKSynthParameterFilterResonance,
 
     // simple parameters
 
@@ -28,10 +25,6 @@ typedef NS_ENUM(AUParameterAddress, MyAKSynthParameter)
     MyAKSynthParameterDecayDuration,
     MyAKSynthParameterSustainLevel,
     MyAKSynthParameterReleaseDuration,
-    MyAKSynthParameterFilterAttackDuration,
-    MyAKSynthParameterFilterDecayDuration,
-    MyAKSynthParameterFilterSustainLevel,
-    MyAKSynthParameterFilterReleaseDuration,
 
     // ensure this is always last in the list, to simplify parameter addressing
     MyAKSynthParameterRampDuration,
@@ -56,10 +49,7 @@ struct MyAKSynthDSP : AKDSPBase, MyAKCoreSynth
     AKLinearParameterRamp masterVolumeRamp;
     AKLinearParameterRamp pitchBendRamp;
     AKLinearParameterRamp vibratoDepthRamp;
-    AKLinearParameterRamp filterCutoffRamp;
-    AKLinearParameterRamp filterStrengthRamp;
-    AKLinearParameterRamp filterResonanceRamp;
-    
+
     MyAKSynthDSP();
     void init(int channelCount, double sampleRate) override;
     void deinit() override;

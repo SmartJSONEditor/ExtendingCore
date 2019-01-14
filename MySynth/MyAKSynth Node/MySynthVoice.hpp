@@ -9,23 +9,11 @@
 #pragma once
 #include <math.h>
 
-#include "EnsembleOscillator.hpp"
 #include "DrawbarsOscillator.hpp"
 #include "ADSREnvelope.h"
-#include "Envelope.hpp"
-#include "MultiStageFilter.hpp"
 
 namespace AudioKitCore
 {
-    struct SynthOscParameters
-    {
-        int phases;             // 1 to 10, or 0 to disable oscillator
-        float frequencySpread;  // cents
-        float panSpread;        // fraction 0 = no spread, 1 = max spread
-        float pitchOffset;      // semitones, relative to MIDI note
-        float mixLevel;         // fraction
-    };
-
     struct OrganParameters
     {
         float drawbars[DrawbarsOscillator::phaseCount];
@@ -34,21 +22,15 @@ namespace AudioKitCore
 
     struct MySynthVoiceParameters
     {
-        SynthOscParameters osc1, osc2;
-        OrganParameters osc3;
-        /// 1 to 4, or 0 to disable filter
-        int filterStages;
+        OrganParameters organ;
     };
 
     struct MySynthVoice
     {
         MySynthVoiceParameters *pParameters;
 
-        EnsembleOscillator osc1, osc2;
-        DrawbarsOscillator osc3;
-        MultiStageFilter leftFilter, rightFilter;            // two filters (left/right)
-        ADSREnvelope ampEG, filterEG;
-        Envelope pumpEG;
+        DrawbarsOscillator drawBarOsc;
+        ADSREnvelope ampEG;
 
         unsigned event;     // last "event number" associated with this voice
         int noteNumber;     // MIDI note number, or -1 if not playing any note
@@ -63,14 +45,10 @@ namespace AudioKitCore
         MySynthVoice() : noteNumber(-1) {}
 
         void init(double sampleRate,
-                  WaveStack *pOsc1Stack,
-                  WaveStack *pOsc2Stack,
-                  WaveStack *pOsc3Stack,
-                  MySynthVoiceParameters *pParameters,
-                  EnvelopeParameters *pEnvParameters);
+                  WaveStack *pOscStack,
+                  MySynthVoiceParameters *pParameters);
 
         void updateAmpAdsrParameters() { ampEG.updateParams(); }
-        void updateFilterAdsrParameters() { filterEG.updateParams(); }
 
         void start(unsigned evt, unsigned noteNumber, float frequency, float volume);
         void restart(unsigned evt, float volume);

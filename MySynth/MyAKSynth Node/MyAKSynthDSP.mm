@@ -34,8 +34,6 @@ MyAKSynthDSP::MyAKSynthDSP() : MyAKCoreSynth()
     masterVolumeRamp.setTarget(1.0, true);
     pitchBendRamp.setTarget(0.0, true);
     vibratoDepthRamp.setTarget(0.0, true);
-    filterCutoffRamp.setTarget(1000.0, true);
-    filterResonanceRamp.setTarget(1.0, true);
 }
 
 void MyAKSynthDSP::init(int channelCount, double sampleRate)
@@ -56,8 +54,6 @@ void MyAKSynthDSP::setParameter(uint64_t address, float value, bool immediate)
             masterVolumeRamp.setRampDuration(value, sampleRate);
             pitchBendRamp.setRampDuration(value, sampleRate);
             vibratoDepthRamp.setRampDuration(value, sampleRate);
-            filterCutoffRamp.setRampDuration(value, sampleRate);
-            filterResonanceRamp.setRampDuration(value, sampleRate);
             break;
 
         case MyAKSynthParameterMasterVolume:
@@ -68,15 +64,6 @@ void MyAKSynthDSP::setParameter(uint64_t address, float value, bool immediate)
             break;
         case MyAKSynthParameterVibratoDepth:
             vibratoDepthRamp.setTarget(value, immediate);
-            break;
-        case MyAKSynthParameterFilterCutoff:
-            filterCutoffRamp.setTarget(value, immediate);
-            break;
-        case MyAKSynthParameterFilterStrength:
-            filterStrengthRamp.setTarget(value, immediate);
-            break;
-        case MyAKSynthParameterFilterResonance:
-            filterResonanceRamp.setTarget(pow(10.0, -0.05 * value), immediate);
             break;
 
         case MyAKSynthParameterAttackDuration:
@@ -90,19 +77,6 @@ void MyAKSynthDSP::setParameter(uint64_t address, float value, bool immediate)
             break;
         case MyAKSynthParameterReleaseDuration:
             setAmpReleaseDurationSeconds(value);
-            break;
-
-        case MyAKSynthParameterFilterAttackDuration:
-            setFilterAttackDurationSeconds(value);
-            break;
-        case MyAKSynthParameterFilterDecayDuration:
-            setFilterDecayDurationSeconds(value);
-            break;
-        case MyAKSynthParameterFilterSustainLevel:
-            setFilterSustainFraction(value);
-            break;
-        case MyAKSynthParameterFilterReleaseDuration:
-            setFilterReleaseDurationSeconds(value);
             break;
     }
 }
@@ -119,12 +93,6 @@ float MyAKSynthDSP::getParameter(uint64_t address)
             return pitchBendRamp.getTarget();
         case MyAKSynthParameterVibratoDepth:
             return vibratoDepthRamp.getTarget();
-        case MyAKSynthParameterFilterCutoff:
-            return filterCutoffRamp.getTarget();
-        case MyAKSynthParameterFilterStrength:
-            return filterStrengthRamp.getTarget();
-        case MyAKSynthParameterFilterResonance:
-            return -20.0f * log10(filterResonanceRamp.getTarget());
 
         case MyAKSynthParameterAttackDuration:
             return getAmpAttackDurationSeconds();
@@ -134,15 +102,6 @@ float MyAKSynthDSP::getParameter(uint64_t address)
             return getAmpSustainFraction();
         case MyAKSynthParameterReleaseDuration:
             return getAmpReleaseDurationSeconds();
-
-        case MyAKSynthParameterFilterAttackDuration:
-            return getFilterAttackDurationSeconds();
-        case MyAKSynthParameterFilterDecayDuration:
-            return getFilterDecayDurationSeconds();
-        case MyAKSynthParameterFilterSustainLevel:
-            return getFilterSustainFraction();
-        case MyAKSynthParameterFilterReleaseDuration:
-            return getFilterReleaseDurationSeconds();
     }
     return 0;
 }
@@ -162,12 +121,6 @@ void MyAKSynthDSP::process(AUAudioFrameCount frameCount, AUAudioFrameCount buffe
         pitchOffset = (float)pitchBendRamp.getValue();
         vibratoDepthRamp.advanceTo(now + frameOffset);
         vibratoDepth = (float)vibratoDepthRamp.getValue();
-        filterCutoffRamp.advanceTo(now + frameOffset);
-        cutoffMultiple = (float)filterCutoffRamp.getValue();
-        filterStrengthRamp.advanceTo(now + frameOffset);
-        cutoffEnvelopeStrength = (float)filterStrengthRamp.getValue();
-        filterResonanceRamp.advanceTo(now + frameOffset);
-        linearResonance = (float)filterResonanceRamp.getValue();
 
         // get data
         float *outBuffers[2];
