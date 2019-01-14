@@ -1,0 +1,471 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		349FA6BE21EA4ECA00B42EAC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349FA6BD21EA4ECA00B42EAC /* AppDelegate.swift */; };
+		349FA6C021EA4ECA00B42EAC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349FA6BF21EA4ECA00B42EAC /* ViewController.swift */; };
+		349FA6C221EA4ECA00B42EAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 349FA6C121EA4ECA00B42EAC /* Assets.xcassets */; };
+		349FA6C521EA4ECA00B42EAC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 349FA6C321EA4ECA00B42EAC /* Main.storyboard */; };
+		349FA6DA21EA56C900B42EAC /* MyAKSynthDSP.mm in Sources */ = {isa = PBXBuildFile; fileRef = 349FA6D621EA56C900B42EAC /* MyAKSynthDSP.mm */; };
+		349FA6DB21EA56C900B42EAC /* MyAKSynthAudioUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349FA6D721EA56C900B42EAC /* MyAKSynthAudioUnit.swift */; };
+		349FA6DC21EA56C900B42EAC /* MyAKSynth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349FA6D921EA56C900B42EAC /* MyAKSynth.swift */; };
+		349FA6DE21EA5BCA00B42EAC /* Conductor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349FA6DD21EA5BC900B42EAC /* Conductor.swift */; };
+		349FA6E921EA70DF00B42EAC /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 349FA6E621EA70BE00B42EAC /* AudioKit.framework */; };
+		349FA6EA21EA70DF00B42EAC /* AudioKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 349FA6E821EA70BE00B42EAC /* AudioKitUI.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		349FA6E521EA70BE00B42EAC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 349FA6E021EA70BE00B42EAC /* AudioKit For macOS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C42F36CC1C0582E6000E937C;
+			remoteInfo = AudioKit;
+		};
+		349FA6E721EA70BE00B42EAC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 349FA6E021EA70BE00B42EAC /* AudioKit For macOS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EAFECEBD1F4EBBFE00A2B046;
+			remoteInfo = AudioKitUI;
+		};
+		349FA6EB21EA70E800B42EAC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 349FA6E021EA70BE00B42EAC /* AudioKit For macOS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C42F36CB1C0582E6000E937C;
+			remoteInfo = AudioKit;
+		};
+		349FA6ED21EA70E800B42EAC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 349FA6E021EA70BE00B42EAC /* AudioKit For macOS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = EAFECEBC1F4EBBFE00A2B046;
+			remoteInfo = AudioKitUI;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		349FA6BA21EA4ECA00B42EAC /* MySynth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MySynth.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		349FA6BD21EA4ECA00B42EAC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		349FA6BF21EA4ECA00B42EAC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		349FA6C121EA4ECA00B42EAC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		349FA6C421EA4ECA00B42EAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		349FA6C621EA4ECA00B42EAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		349FA6C721EA4ECA00B42EAC /* MySynth.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MySynth.entitlements; sourceTree = "<group>"; };
+		349FA6CE21EA4FCA00B42EAC /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioKit.framework; path = "../../../AudioKit/Frameworks/AudioKit-macOS/AudioKit.framework"; sourceTree = "<group>"; };
+		349FA6CF21EA4FCA00B42EAC /* AudioKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioKitUI.framework; path = "../../../AudioKit/Frameworks/AudioKit-macOS/AudioKitUI.framework"; sourceTree = "<group>"; };
+		349FA6D421EA554A00B42EAC /* MySynth-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MySynth-Bridging-Header.h"; sourceTree = "<group>"; };
+		349FA6D621EA56C900B42EAC /* MyAKSynthDSP.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MyAKSynthDSP.mm; sourceTree = "<group>"; };
+		349FA6D721EA56C900B42EAC /* MyAKSynthAudioUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAKSynthAudioUnit.swift; sourceTree = "<group>"; };
+		349FA6D821EA56C900B42EAC /* MyAKSynthDSP.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MyAKSynthDSP.hpp; sourceTree = "<group>"; };
+		349FA6D921EA56C900B42EAC /* MyAKSynth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAKSynth.swift; sourceTree = "<group>"; };
+		349FA6DD21EA5BC900B42EAC /* Conductor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conductor.swift; sourceTree = "<group>"; };
+		349FA6E021EA70BE00B42EAC /* AudioKit For macOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "AudioKit For macOS.xcodeproj"; path = "../../AudioKit/AudioKit/macOS/AudioKit For macOS.xcodeproj"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		349FA6B721EA4ECA00B42EAC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				349FA6E921EA70DF00B42EAC /* AudioKit.framework in Frameworks */,
+				349FA6EA21EA70DF00B42EAC /* AudioKitUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		349FA6B121EA4ECA00B42EAC = {
+			isa = PBXGroup;
+			children = (
+				349FA6E021EA70BE00B42EAC /* AudioKit For macOS.xcodeproj */,
+				349FA6D521EA565C00B42EAC /* MyAKSynth Node */,
+				349FA6BC21EA4ECA00B42EAC /* MySynth */,
+				349FA6BB21EA4ECA00B42EAC /* Products */,
+				349FA6CD21EA4FCA00B42EAC /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		349FA6BB21EA4ECA00B42EAC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				349FA6BA21EA4ECA00B42EAC /* MySynth.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		349FA6BC21EA4ECA00B42EAC /* MySynth */ = {
+			isa = PBXGroup;
+			children = (
+				349FA6DD21EA5BC900B42EAC /* Conductor.swift */,
+				349FA6BD21EA4ECA00B42EAC /* AppDelegate.swift */,
+				349FA6BF21EA4ECA00B42EAC /* ViewController.swift */,
+				349FA6C121EA4ECA00B42EAC /* Assets.xcassets */,
+				349FA6C321EA4ECA00B42EAC /* Main.storyboard */,
+				349FA6C621EA4ECA00B42EAC /* Info.plist */,
+				349FA6C721EA4ECA00B42EAC /* MySynth.entitlements */,
+			);
+			path = MySynth;
+			sourceTree = "<group>";
+		};
+		349FA6CD21EA4FCA00B42EAC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				349FA6CE21EA4FCA00B42EAC /* AudioKit.framework */,
+				349FA6CF21EA4FCA00B42EAC /* AudioKitUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		349FA6D521EA565C00B42EAC /* MyAKSynth Node */ = {
+			isa = PBXGroup;
+			children = (
+				349FA6D421EA554A00B42EAC /* MySynth-Bridging-Header.h */,
+				349FA6D921EA56C900B42EAC /* MyAKSynth.swift */,
+				349FA6D721EA56C900B42EAC /* MyAKSynthAudioUnit.swift */,
+				349FA6D821EA56C900B42EAC /* MyAKSynthDSP.hpp */,
+				349FA6D621EA56C900B42EAC /* MyAKSynthDSP.mm */,
+			);
+			path = "MyAKSynth Node";
+			sourceTree = "<group>";
+		};
+		349FA6E121EA70BE00B42EAC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				349FA6E621EA70BE00B42EAC /* AudioKit.framework */,
+				349FA6E821EA70BE00B42EAC /* AudioKitUI.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		349FA6B921EA4ECA00B42EAC /* MySynth */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 349FA6CA21EA4ECA00B42EAC /* Build configuration list for PBXNativeTarget "MySynth" */;
+			buildPhases = (
+				349FA6B621EA4ECA00B42EAC /* Sources */,
+				349FA6B721EA4ECA00B42EAC /* Frameworks */,
+				349FA6B821EA4ECA00B42EAC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				349FA6EC21EA70E800B42EAC /* PBXTargetDependency */,
+				349FA6EE21EA70E800B42EAC /* PBXTargetDependency */,
+			);
+			name = MySynth;
+			productName = MySynth;
+			productReference = 349FA6BA21EA4ECA00B42EAC /* MySynth.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		349FA6B221EA4ECA00B42EAC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = AudioKit;
+				TargetAttributes = {
+					349FA6B921EA4ECA00B42EAC = {
+						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 349FA6B521EA4ECA00B42EAC /* Build configuration list for PBXProject "MySynth" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 349FA6B121EA4ECA00B42EAC;
+			productRefGroup = 349FA6BB21EA4ECA00B42EAC /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 349FA6E121EA70BE00B42EAC /* Products */;
+					ProjectRef = 349FA6E021EA70BE00B42EAC /* AudioKit For macOS.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				349FA6B921EA4ECA00B42EAC /* MySynth */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		349FA6E621EA70BE00B42EAC /* AudioKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AudioKit.framework;
+			remoteRef = 349FA6E521EA70BE00B42EAC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		349FA6E821EA70BE00B42EAC /* AudioKitUI.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AudioKitUI.framework;
+			remoteRef = 349FA6E721EA70BE00B42EAC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		349FA6B821EA4ECA00B42EAC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				349FA6C221EA4ECA00B42EAC /* Assets.xcassets in Resources */,
+				349FA6C521EA4ECA00B42EAC /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		349FA6B621EA4ECA00B42EAC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				349FA6C021EA4ECA00B42EAC /* ViewController.swift in Sources */,
+				349FA6DE21EA5BCA00B42EAC /* Conductor.swift in Sources */,
+				349FA6DB21EA56C900B42EAC /* MyAKSynthAudioUnit.swift in Sources */,
+				349FA6DC21EA56C900B42EAC /* MyAKSynth.swift in Sources */,
+				349FA6DA21EA56C900B42EAC /* MyAKSynthDSP.mm in Sources */,
+				349FA6BE21EA4ECA00B42EAC /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		349FA6EC21EA70E800B42EAC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AudioKit;
+			targetProxy = 349FA6EB21EA70E800B42EAC /* PBXContainerItemProxy */;
+		};
+		349FA6EE21EA70E800B42EAC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AudioKitUI;
+			targetProxy = 349FA6ED21EA70E800B42EAC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		349FA6C321EA4ECA00B42EAC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				349FA6C421EA4ECA00B42EAC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		349FA6C821EA4ECA00B42EAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		349FA6C921EA4ECA00B42EAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		349FA6CB21EA4ECA00B42EAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 9W69ZP8S5F;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../AudioKit/AudioKit/Common/Internals/CoreAudio\"/**",
+					"\"$(SRCROOT)/../../AudioKit/AudioKit/Core/AudioKitCore\"/**",
+					"\"$(SRCROOT)/../../AudioKit/AudioKit/Common/Internals/Utilities\"",
+				);
+				INFOPLIST_FILE = MySynth/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.audiokit.MySynth;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/MyAKSynth Node/MySynth-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		349FA6CC21EA4ECA00B42EAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 9W69ZP8S5F;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../AudioKit/AudioKit/Common/Internals/CoreAudio\"/**",
+					"\"$(SRCROOT)/../../AudioKit/AudioKit/Core/AudioKitCore\"/**",
+					"\"$(SRCROOT)/../../AudioKit/AudioKit/Common/Internals/Utilities\"",
+				);
+				INFOPLIST_FILE = MySynth/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.audiokit.MySynth;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/MyAKSynth Node/MySynth-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		349FA6B521EA4ECA00B42EAC /* Build configuration list for PBXProject "MySynth" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				349FA6C821EA4ECA00B42EAC /* Debug */,
+				349FA6C921EA4ECA00B42EAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		349FA6CA21EA4ECA00B42EAC /* Build configuration list for PBXNativeTarget "MySynth" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				349FA6CB21EA4ECA00B42EAC /* Debug */,
+				349FA6CC21EA4ECA00B42EAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 349FA6B221EA4ECA00B42EAC /* Project object */;
+}
