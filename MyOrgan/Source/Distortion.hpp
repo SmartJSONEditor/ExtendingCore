@@ -15,7 +15,7 @@ namespace AudioKitCore
     class Distortion
     {
     public:
-        Distortion() : gain(1.0f), drive(1.0f), power(0.0f) {}
+        Distortion() : gain(1.0f), drive(1.0f), power(1.0f) {}
 
         void init(int tableSize = 1024);
         void deinit();

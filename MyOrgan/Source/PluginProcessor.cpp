@@ -220,7 +220,6 @@ AudioProcessorEditor* MyOrganAudioProcessor::createEditor()
 void MyOrganAudioProcessor::getStateInformation (MemoryBlock& destData)
 {
     XmlElement xml = XmlElement("myOrgan");
-    xml.setAttribute("masterVol", synth.getMasterVolume());
     xml.setAttribute("drawBar0", synth.getDrawBar(0));
     xml.setAttribute("drawBar1", synth.getDrawBar(1));
     xml.setAttribute("drawBar2", synth.getDrawBar(2));
@@ -230,13 +229,15 @@ void MyOrganAudioProcessor::getStateInformation (MemoryBlock& destData)
     xml.setAttribute("drawBar6", synth.getDrawBar(6));
     xml.setAttribute("drawBar7", synth.getDrawBar(7));
     xml.setAttribute("drawBar8", synth.getDrawBar(8));
+    xml.setAttribute("power", distortion.getPower());
+    xml.setAttribute("drive", distortion.getDrive());
+    xml.setAttribute("gain", distortion.getGain());
     copyXmlToBinary(xml, destData);
 }
 
 void MyOrganAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     ScopedPointer<XmlElement> xml = getXmlFromBinary(data, sizeInBytes);
-    synth.setMasterVolume(float(xml->getDoubleAttribute("masterVol", 1.0)));
     synth.setDrawBar(0, float(xml->getDoubleAttribute("drawBar0", 1.0)));
     synth.setDrawBar(1, float(xml->getDoubleAttribute("drawBar1", 0.0)));
     synth.setDrawBar(2, float(xml->getDoubleAttribute("drawBar2", 0.0)));
@@ -246,6 +247,9 @@ void MyOrganAudioProcessor::setStateInformation (const void* data, int sizeInByt
     synth.setDrawBar(6, float(xml->getDoubleAttribute("drawBar6", 0.0)));
     synth.setDrawBar(7, float(xml->getDoubleAttribute("drawBar7", 0.0)));
     synth.setDrawBar(8, float(xml->getDoubleAttribute("drawBar8", 0.0)));
+    distortion.setPower(float(xml->getDoubleAttribute("power", 1.0)));
+    distortion.setDrive(float(xml->getDoubleAttribute("drive", 1.0)));
+    distortion.setGain(float(xml->getDoubleAttribute("gain", 1.0)));
     sendChangeMessage();
 }
 
