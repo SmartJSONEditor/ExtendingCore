@@ -6,63 +6,6 @@ extern "C" {
 #include "whirl.h"
 }
 
-enum PortIndex {
-    B3W_INPUT = 0,
-    B3W_OUTL,
-    B3W_OUTR,
-
-    B3W_REVSELECT, // 3
-
-    B3W_HORNLVL,
-    B3W_DRUMLVL,
-    B3W_DRUMWIDTH,
-
-    B3W_HORNRPMSLOW, // 7
-    B3W_HORNRPMFAST,
-    B3W_HORNACCEL,
-    B3W_HORNDECEL,
-    B3W_HORNBRAKE,
-
-    B3W_FILTATYPE, // 12
-    B3W_FILTAFREQ,
-    B3W_FILTAQUAL,
-    B3W_FILTAGAIN,
-
-    B3W_FILTBTYPE, // 16
-    B3W_FILTBFREQ,
-    B3W_FILTBQUAL,
-    B3W_FILTBGAIN,
-
-    B3W_DRUMRPMSLOW, // 20
-    B3W_DRUMRPMFAST,
-    B3W_DRUMACCEL,
-    B3W_DRUMDECEL,
-    B3W_DRUMBRAKE,
-
-    B3W_FILTDTYPE, // 25
-    B3W_FILTDFREQ,
-    B3W_FILTDQUAL,
-    B3W_FILTDGAIN,
-
-    B3W_HORNLEAK, // 29
-    B3W_HORNRADIUS,
-    B3W_DRUMRADIUS,
-    B3W_HORNOFFX,
-    B3W_HORNOFFZ,
-    B3W_MICDIST,
-
-    B3W_HORNRPM, // 35
-    B3W_DRUMRPM,
-
-    B3W_HORNANG,
-    B3W_DRUMANG,
-
-    B3W_GUINOTIFY,
-    B3W_LINKSPEED, // 40
-    B3W_MICANGLE,
-    B3W_HORNWIDTH,
-};
-
 struct Filter {
     float *type, *freq, *qual, *gain; // ports
     iir_t* W[2];                      /* pointers to coeffs, drum-filter x2 */

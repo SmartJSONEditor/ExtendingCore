@@ -13,10 +13,15 @@ MyOrganAudioProcessor::MyOrganAudioProcessor()
                        )
 #endif
 {
+    workBuf[0] = workBuf[1] = nullptr;
+    distortion.init(512);
+    distortion.linearCurve(0.5f);
 }
 
 MyOrganAudioProcessor::~MyOrganAudioProcessor()
 {
+    distortion.deinit();
+    if (workBuf[0]) delete workBuf[0];
 }
 
 const String MyOrganAudioProcessor::getName() const
@@ -66,27 +71,33 @@ int MyOrganAudioProcessor::getCurrentProgram()
     return 0;
 }
 
-void MyOrganAudioProcessor::setCurrentProgram (int index)
+void MyOrganAudioProcessor::setCurrentProgram (int)
 {
 }
 
-const String MyOrganAudioProcessor::getProgramName (int index)
+const String MyOrganAudioProcessor::getProgramName (int)
 {
     return {};
 }
 
-void MyOrganAudioProcessor::changeProgramName (int index, const String& newName)
+void MyOrganAudioProcessor::changeProgramName (int, const String&)
 {
 }
 
 void MyOrganAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
     synth.init(sampleRate);
+    leslie.init(sampleRate);
+
+    if (workBuf[0]) delete workBuf[0];
+    workBuf[0] = new float[2 * samplesPerBlock];
+    workBuf[1] = workBuf[0] + samplesPerBlock;
 }
 
 void MyOrganAudioProcessor::releaseResources()
 {
     synth.deinit();
+    leslie.deinit();
 }
 
 #ifndef JucePlugin_PreferredChannelConfigurations
@@ -117,6 +128,11 @@ void MyOrganAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer
 {
     ScopedNoDenormals noDenormals;
     float* outBuffers[2] = { buffer.getWritePointer(0), buffer.getWritePointer(1) };
+    float* workBuffers[2] = { workBuf[0], workBuf[1] };
+
+    memset(outBuffers[0], 0, buffer.getNumSamples() * sizeof(float));
+    memset(outBuffers[1], 0, buffer.getNumSamples() * sizeof(float));
+    memset(workBuf[0], 0, 2 * buffer.getNumSamples() * sizeof(float));
 
     MidiBuffer::Iterator it(midiMessages);
     MidiMessage msg;
@@ -137,11 +153,11 @@ void MyOrganAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer
         }
         else if (msg.isSustainPedalOn())
         {
-            synth.sustainPedal(true);
+            leslie.setSpeed(8.0f);
         }
         else if (msg.isSustainPedalOff())
         {
-            synth.sustainPedal(false);
+            leslie.setSpeed(4.0f);
         }
         else if (msg.isPitchWheel())
         {
@@ -178,11 +194,25 @@ void MyOrganAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer
     while (samplesRemaining)
     {
         if (samplesRemaining < chunkSize) chunkSize = samplesRemaining;
-        synth.render(channelCount, chunkSize, outBuffers);
+        synth.render(channelCount, chunkSize, workBuffers);
         samplesRemaining -= chunkSize;
-        outBuffers[0] += chunkSize;
-        outBuffers[1] += chunkSize;
+        workBuffers[0] += chunkSize;
+        workBuffers[1] += chunkSize;
     }
+
+    int sampleCount = buffer.getNumSamples();   // left only
+    float* sp = workBuf[0];
+    for (int i = 0; i < sampleCount; i++, sp++)
+    {
+        float sample = *sp * 5.0f;
+        if (sample < 0.0f)
+            *sp = -distortion.interp_bounded(-sample);
+        else
+            *sp = distortion.interp_bounded(sample);
+    }
+
+    const float* workBufs[2] = { workBuf[0], workBuf[1] };
+    leslie.render(buffer.getNumSamples(), workBufs, outBuffers);
 }
 
 bool MyOrganAudioProcessor::hasEditor() const

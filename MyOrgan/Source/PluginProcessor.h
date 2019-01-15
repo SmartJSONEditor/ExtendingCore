@@ -1,6 +1,8 @@
 #pragma once
 #include "JuceHeader.h"
 #include "MyAKCoreSynth.hpp"
+#include "Leslie.hpp"
+#include "FunctionTable.hpp"
 
 class MyOrganAudioProcessor :   public AudioProcessor,
                                 public ChangeBroadcaster
@@ -38,7 +40,11 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
     MyAKCoreSynth synth;
+    AudioKitCore::FunctionTable distortion;
+    Leslie leslie;
 
 private:
+    float* workBuf[2];
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MyOrganAudioProcessor)
 };

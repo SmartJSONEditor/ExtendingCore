@@ -3,8 +3,17 @@
 <JUCERPROJECT id="IXkp6K" name="MyOrgan" projectType="audioplug" jucerVersion="5.4.1"
               companyName="AudioKit" pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
               pluginFormats="buildAU,buildStandalone,buildVST" pluginDesc="Test wrapper for Core Synth"
-              pluginManufacturerCode="AKit" pluginChannelConfigs="{0, 2}" headerPath="../../../../AudioKit/AudioKit/Core/AudioKitCore/Common&#10;../../../../AudioKit/AudioKit/Core/AudioKitCore/Synth&#10;../../../../AudioKit/AudioKit/Core/Soundpipe/lib/kissfft">
+              pluginManufacturerCode="AKit" pluginChannelConfigs="{0, 2}" headerPath="../../../../AudioKit/AudioKit/Core/AudioKitCore/Common&#10;../../../../AudioKit/AudioKit/Core/AudioKitCore/Synth&#10;../../../../AudioKit/AudioKit/Core/Soundpipe/lib/kissfft&#10;../../../Leslie/Source">
   <MAINGROUP id="HQPykZ" name="MyOrgan">
+    <GROUP id="{BEC9FCE7-FC91-A73C-5344-B3E6DDD2BDE9}" name="Leslie">
+      <FILE id="qCavkl" name="b_whirl.h" compile="0" resource="0" file="../Leslie/Source/b_whirl.h"/>
+      <FILE id="OImWFU" name="eqcomp.c" compile="1" resource="0" file="../Leslie/Source/eqcomp.c"/>
+      <FILE id="ZBhmaa" name="eqcomp.h" compile="0" resource="0" file="../Leslie/Source/eqcomp.h"/>
+      <FILE id="iCKRKZ" name="Leslie.cpp" compile="1" resource="0" file="../Leslie/Source/Leslie.cpp"/>
+      <FILE id="Dc5POm" name="Leslie.hpp" compile="0" resource="0" file="../Leslie/Source/Leslie.hpp"/>
+      <FILE id="g8JwV1" name="whirl.c" compile="1" resource="0" file="../Leslie/Source/whirl.c"/>
+      <FILE id="GVLROi" name="whirl.h" compile="0" resource="0" file="../Leslie/Source/whirl.h"/>
+    </GROUP>
     <GROUP id="{B74F1DB5-EDCF-D1AD-5D16-621C3AB7B7A6}" name="kissfft">
       <FILE id="ky5a3p" name="_kiss_fft_guts.h" compile="0" resource="0"
             file="../../AudioKit/AudioKit/Core/Soundpipe/lib/kissfft/_kiss_fft_guts.h"/>
