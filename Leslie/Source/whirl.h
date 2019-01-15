@@ -1,4 +1,5 @@
 #pragma once
+#include <stddef.h>
 
 #define WHIRL_DISPLC_SIZE ((unsigned int)(1 << 14))
 #define WHIRL_DISPLC_MASK ((WHIRL_DISPLC_SIZE)-1)
@@ -189,25 +190,25 @@ struct b_whirl {
 	void* midi_cfg_ptr;
 };
 
-extern struct b_whirl* allocWhirl ();
-extern void freeWhirl (struct b_whirl* w);
+struct b_whirl* allocWhirl(void);
+void freeWhirl (struct b_whirl* w);
 
-extern void initWhirl (struct b_whirl* w, void* m, double rate);
+void initWhirl (struct b_whirl* w, void* m, double rate);
 
-extern void whirlProc (struct b_whirl* w,
+void whirlProc (struct b_whirl* w,
                        const float*    inbuffer,
                        float*          outbL,
                        float*          outbR,
                        size_t          bufferLengthSamples);
 
-extern void whirlProc2 (struct b_whirl* w,
+void whirlProc2 (struct b_whirl* w,
                         const float*    inbuffer,
                         float* outL, float* outR,
                         float* outHL, float* outHR,
                         float* outDL, float* outDR,
                         size_t bufferLengthSamples);
 
-extern void whirlProc3 (struct b_whirl* w,
+void whirlProc3 (struct b_whirl* w,
                         const float*    inbuffer,
                         float* outL, float* outR,
                         float* tmpL, float* tmpR,
@@ -218,20 +219,6 @@ extern void whirlProc3 (struct b_whirl* w,
 #define WHIRL_SLOW 0
 #define WHIRL_STOP 1
 
-extern void setRevSelect (struct b_whirl* w, int n);
 extern void useRevOption (struct b_whirl* w, int n, int signals);
-extern void isetHornFilterAType (struct b_whirl* w, int v);
-extern void fsetHornFilterAFrequency (struct b_whirl* w, float v);
-extern void fsetHornFilterAQ (struct b_whirl* w, float v);
-extern void fsetHornFilterAGain (struct b_whirl* w, float v);
-extern void isetHornFilterBType (struct b_whirl* w, int v);
-extern void fsetHornFilterBFrequency (struct b_whirl* w, float v);
-extern void fsetHornFilterBQ (struct b_whirl* w, float v);
-extern void fsetHornFilterBGain (struct b_whirl* w, float v);
-extern void isetDrumFilterType (struct b_whirl* w, int v);
-extern void fsetDrumFilterFrequency (struct b_whirl* w, float v);
-extern void fsetDrumFilterQ (struct b_whirl* w, float v);
-extern void fsetDrumFilterGain (struct b_whirl* w, float v);
 extern void computeRotationSpeeds (struct b_whirl* w);
 extern void computeOffsets (struct b_whirl* w);
-extern void fsetDrumMicWidth (void* d, const float dw);

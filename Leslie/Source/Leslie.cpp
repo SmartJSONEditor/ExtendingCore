@@ -1,6 +1,5 @@
-#include "leslie.hpp"
+#include "Leslie.hpp"
 #include <stdlib.h>
-#include <malloc.h>
 #include <math.h>
 #include <string.h>
 #include <assert.h>

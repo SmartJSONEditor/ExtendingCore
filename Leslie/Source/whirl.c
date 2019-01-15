@@ -114,7 +114,7 @@ initValues (struct b_whirl* w)
 }
 
 struct b_whirl*
-allocWhirl ()
+allocWhirl (void)
 {
 	struct b_whirl* w = (struct b_whirl*)calloc (1, sizeof (struct b_whirl));
 	if (!w)
@@ -161,14 +161,6 @@ setIIRFilter (iir_t        W[],
 	W[b2] = (iir_t)C[EQC_B2];
 }
 
-// SD I don't know what this is supposed to do, but it's called below so I'm adding a dummy
-void notifyControlChangeByName(void* midiCfgPtr, const char* name, float value)
-{
-    midiCfgPtr;
-    name;
-    value;
-}
-
 void
 useRevOption (struct b_whirl* w, int n, int signals)
 {
@@ -188,9 +180,9 @@ useRevOption (struct b_whirl* w, int n, int signals)
 		w->drumAcDc = -1;
 	}
 
-	if (signals & 1) {
-		notifyControlChangeByName (w->midi_cfg_ptr, "rotary.speed-select", ceilf (n * 15.875f));
-	}
+//    if (signals & 1) {
+//        notifyControlChangeByName (w->midi_cfg_ptr, "rotary.speed-select", ceilf (n * 15.875f));
+//    }
 	if (signals & 2) {
 		const int hr = (n / 3) % 3; /* horn 0:off, 1:chorale  2:tremolo */
 		switch (hr) {
@@ -204,7 +196,7 @@ useRevOption (struct b_whirl* w, int n, int signals)
 				w->revSelect = WHIRL_STOP;
 				break;
 		}
-		notifyControlChangeByName (w->midi_cfg_ptr, "rotary.speed-preset", ceilf (w->revSelect * 63.5f));
+		//notifyControlChangeByName (w->midi_cfg_ptr, "rotary.speed-preset", ceilf (w->revSelect * 63.5f));
 	}
 }
 
@@ -216,23 +208,6 @@ setRevSelect (struct b_whirl* w, int n)
 	w->revSelect = n % revSelectEnd;
 	i            = w->revselects[w->revSelect];
 	useRevOption (w, i, 1);
-}
-
-/* used by rotary.speed-select */
-static void
-revControlAll (void* d, unsigned char u)
-{
-	struct b_whirl* w = (struct b_whirl*)d;
-	useRevOption (w, (int)(u / 15), 2); /* 0..8 */
-}
-
-/* used by rotary.speed-preset */
-static void
-revControl (void* d, unsigned char u)
-{
-	struct b_whirl* w = (struct b_whirl*)d;
-	/* 0, 127 -> slow, fast */
-	setRevSelect (w, (int)(u / 43)); /* 3 modes only - fast, stop, slow */
 }
 
 /* used by rotary.speed-toggle */
@@ -672,284 +647,6 @@ initialize (struct b_whirl* w)
         setIIRFilter (w->drfR, w->lpT, w->lpF, w->lpQ, w->lpG, w->SampleRateD); \
 }
 /* clang-format on */
-
-/*
- * Sets the type of the A horn IIR filter.
- */
-static void
-setHornFilterAType (void* d, unsigned char uc)
-{
-	struct b_whirl* w = (struct b_whirl*)d;
-	w->haT            = (int)(uc / 15);
-	UPDATE_A_FILTER;
-}
-
-void
-isetHornFilterAType (struct b_whirl* w, int v)
-{
-	w->haT = (int)(v % 9);
-	UPDATE_A_FILTER;
-}
-
-/*
- * Sets the cutoff frequency of the A horn IIR filter.
- */
-static void
-setHornFilterAFrequency (void* d, unsigned char uc)
-{
-	struct b_whirl* w    = (struct b_whirl*)d;
-	double          u    = (double)uc;
-	double          minv = 250.0;
-	double          maxv = 8000.0;
-	w->haF               = (float)(minv + ((maxv - minv) * ((u * u) / 16129.0)));
-	UPDATE_A_FILTER;
-}
-
-void
-fsetHornFilterAFrequency (struct b_whirl* w, float v)
-{
-	if (v < 250.0 || v > 8000.0)
-		return;
-	w->haF = v;
-	UPDATE_A_FILTER;
-}
-
-/*
- * Sets the Q value of the A horn IIR filter.
- */
-static void
-setHornFilterAQ (void* d, unsigned char uc)
-{
-	struct b_whirl* w    = (struct b_whirl*)d;
-	double          u    = (double)uc;
-	double          minv = 0.01;
-	double          maxv = 6.00;
-	w->haQ               = (float)(minv + ((maxv - minv) * (u / 127.0)));
-	UPDATE_A_FILTER;
-}
-
-void
-fsetHornFilterAQ (struct b_whirl* w, float v)
-{
-	if (v < 0.01 || v > 6.0)
-		return;
-	w->haQ = v;
-	UPDATE_A_FILTER;
-}
-
-/*
- * Sets the Gain value of the A horn IIR filter.
- */
-static void
-setHornFilterAGain (void* d, unsigned char uc)
-{
-	struct b_whirl* w    = (struct b_whirl*)d;
-	double          u    = (double)uc;
-	double          minv = -48.0;
-	double          maxv = 48.0;
-	w->haG               = (float)(minv + ((maxv - minv) * (u / 127.0)));
-	UPDATE_A_FILTER;
-}
-
-void
-fsetHornFilterAGain (struct b_whirl* w, float v)
-{
-	if (v < -48.0 || v > 48.0)
-		return;
-	w->haG = v;
-	UPDATE_A_FILTER;
-}
-
-static void
-setHornFilterBType (void* d, unsigned char uc)
-{
-	struct b_whirl* w = (struct b_whirl*)d;
-	w->hbT            = (int)(uc / 15);
-	UPDATE_B_FILTER;
-}
-
-void
-isetHornFilterBType (struct b_whirl* w, int v)
-{
-	w->hbT = (int)(v % 9);
-	UPDATE_B_FILTER;
-}
-
-static void
-setHornFilterBFrequency (void* d, unsigned char uc)
-{
-	struct b_whirl* w    = (struct b_whirl*)d;
-	double          u    = (double)uc;
-	double          minv = 250.0;
-	double          maxv = 8000.0;
-	w->hbF               = (float)(minv + ((maxv - minv) * ((u * u) / 16129.0)));
-	UPDATE_B_FILTER;
-}
-
-void
-fsetHornFilterBFrequency (struct b_whirl* w, float v)
-{
-	if (v < 250.0 || v > 8000.0)
-		return;
-	w->hbF = v;
-	UPDATE_B_FILTER;
-}
-
-static void
-setHornFilterBQ (void* d, unsigned char uc)
-{
-	struct b_whirl* w    = (struct b_whirl*)d;
-	double          u    = (double)uc;
-	double          minv = 0.01;
-	double          maxv = 6.00;
-	w->hbQ               = (float)(minv + ((maxv - minv) * (u / 127.0)));
-	UPDATE_B_FILTER;
-}
-
-void
-fsetHornFilterBQ (struct b_whirl* w, float v)
-{
-	if (v < 0.01 || v > 6.0)
-		return;
-	w->hbQ = v;
-	UPDATE_B_FILTER;
-}
-
-static void
-setHornFilterBGain (void* d, unsigned char uc)
-{
-	struct b_whirl* w    = (struct b_whirl*)d;
-	double          u    = (double)uc;
-	double          minv = -48.0;
-	double          maxv = 48.0;
-	w->hbG               = (float)(minv + ((maxv - minv) * (u / 127.0)));
-	UPDATE_B_FILTER;
-}
-
-void
-fsetHornFilterBGain (struct b_whirl* w, float v)
-{
-	if (v < -48.0 || v > 48.0)
-		return;
-	w->hbG = v;
-	UPDATE_B_FILTER;
-}
-
-void
-isetDrumFilterType (struct b_whirl* w, int v)
-{
-	w->lpT = (int)(v % 9);
-	UPDATE_D_FILTER;
-}
-
-void
-fsetDrumFilterFrequency (struct b_whirl* w, float v)
-{
-	if (v < 20.0 || v > 8000.0)
-		return;
-	w->lpF = v;
-	UPDATE_D_FILTER;
-}
-
-void
-fsetDrumFilterQ (struct b_whirl* w, float v)
-{
-	if (v < 0.01 || v > 6.0)
-		return;
-	w->lpQ = v;
-	UPDATE_D_FILTER;
-}
-
-void
-fsetDrumFilterGain (struct b_whirl* w, float v)
-{
-	if (v < -48.0 || v > 48.0)
-		return;
-	w->lpG = v;
-	UPDATE_D_FILTER;
-}
-
-static void
-setHornBrakePosition (void* d, unsigned char uc)
-{
-	struct b_whirl* w = (struct b_whirl*)d;
-	w->hnBrakePos     = (double)uc / 127.0;
-}
-
-static void
-setDrumBrakePosition (void* d, unsigned char uc)
-{
-	struct b_whirl* w = (struct b_whirl*)d;
-	w->drBrakePos     = (double)uc / 127.0;
-}
-
-static void
-setHornAcceleration (void* d, unsigned char uc)
-{
-	struct b_whirl* w = (struct b_whirl*)d;
-	w->hornAcc        = .01f + uc / 80.0f;
-}
-
-static void
-setHornDeceleration (void* d, unsigned char uc)
-{
-	struct b_whirl* w = (struct b_whirl*)d;
-	w->hornDec        = .01f + uc / 80.0f;
-}
-
-void
-setDrumAcceleration (void* d, unsigned char uc)
-{
-	struct b_whirl* w = (struct b_whirl*)d;
-	w->drumAcc        = .01f + uc / 14.0f;
-}
-
-static void
-setDrumDeceleration (void* d, unsigned char uc)
-{
-	struct b_whirl* w = (struct b_whirl*)d;
-	w->drumDec        = .01f + uc / 14.0f;
-}
-
-void
-fsetDrumMicWidth (void* d, const float dw)
-{
-	struct b_whirl* w = (struct b_whirl*)d;
-
-	if (w->drumMicWidth == dw) {
-		return;
-	}
-
-	w->drumMicWidth = dw;
-
-	const float dwP = dw > 0.f ? (dw > 1.f ? 1.f : dw) : 0.f;
-	const float dwN = dw < 0.f ? (dw < -1.f ? 1.f : -dw) : 0.f;
-
-	w->drumMic_dll = sqrtf (1.f - dwP);
-	w->drumMic_dlr = sqrtf (0.f + dwP);
-	w->drumMic_drl = sqrtf (0.f + dwN);
-	w->drumMic_drr = sqrtf (1.f - dwN);
-}
-
-void
-fsetHornMicWidth (void* d, const float hw)
-{
-	struct b_whirl* w = (struct b_whirl*)d;
-
-	if (w->hornMicWidth == hw) {
-		return;
-	}
-
-	w->hornMicWidth = hw;
-
-	const float hwP = hw > 0.f ? (hw > 1.f ? 1.f : hw) : 0.f;
-	const float hwN = hw < 0.f ? (hw < -1.f ? 1.f : -hw) : 0.f;
-
-	w->hornMic_hll = sqrtf (1.f - hwP);
-	w->hornMic_hlr = sqrtf (0.f + hwP);
-	w->hornMic_hrl = sqrtf (0.f + hwN);
-	w->hornMic_hrr = sqrtf (1.f - hwN);
-}
 
 /*
  * This function initialises this module. It is run after whirlConfig.
