@@ -15,7 +15,6 @@ MyOrganAudioProcessor::MyOrganAudioProcessor()
 {
     workBuf[0] = workBuf[1] = nullptr;
     distortion.init(512);
-    distortion.linearCurve(0.5f);
 }
 
 MyOrganAudioProcessor::~MyOrganAudioProcessor()
@@ -202,14 +201,7 @@ void MyOrganAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer
 
     int sampleCount = buffer.getNumSamples();   // left only
     float* sp = workBuf[0];
-    for (int i = 0; i < sampleCount; i++, sp++)
-    {
-        float sample = *sp * 5.0f;
-        if (sample < 0.0f)
-            *sp = -distortion.interp_bounded(-sample);
-        else
-            *sp = distortion.interp_bounded(sample);
-    }
+    for (int i = 0; i < sampleCount; i++) distortion.processInPlace(sp++);
 
     const float* workBufs[2] = { workBuf[0], workBuf[1] };
     leslie.render(buffer.getNumSamples(), workBufs, outBuffers);

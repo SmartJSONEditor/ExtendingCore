@@ -2,7 +2,7 @@
 #include "JuceHeader.h"
 #include "MyAKCoreSynth.hpp"
 #include "Leslie.hpp"
-#include "FunctionTable.hpp"
+#include "Distortion.hpp"
 
 class MyOrganAudioProcessor :   public AudioProcessor,
                                 public ChangeBroadcaster
@@ -40,7 +40,7 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
     MyAKCoreSynth synth;
-    AudioKitCore::FunctionTable distortion;
+    AudioKitCore::Distortion distortion;
     Leslie leslie;
 
 private:

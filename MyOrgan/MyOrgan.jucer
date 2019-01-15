@@ -54,6 +54,8 @@
       </GROUP>
     </GROUP>
     <GROUP id="{3973922E-B962-5A59-E6CC-64EDD1FE30F5}" name="Source">
+      <FILE id="GWjQA8" name="Distortion.cpp" compile="1" resource="0" file="Source/Distortion.cpp"/>
+      <FILE id="vyAvXy" name="Distortion.hpp" compile="0" resource="0" file="Source/Distortion.hpp"/>
       <FILE id="D6EQ97" name="MyAKCoreSynth.cpp" compile="1" resource="0"
             file="Source/MyAKCoreSynth.cpp"/>
       <FILE id="CaB9th" name="MyAKCoreSynth.hpp" compile="0" resource="0"
