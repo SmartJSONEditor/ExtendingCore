@@ -18,7 +18,7 @@ MyOrganAudioProcessorEditor::MyOrganAudioProcessorEditor (MyOrganAudioProcessor&
     processor.addChangeListener(this);
 
     masterVolume.setRange(0.0, 1.0);
-    masterVolume.setValue(1.0);
+    masterVolume.setValue(processor.synth.getMasterVolume());
     masterVolume.onValueChange = [this] {
         processor.synth.setMasterVolume(float(masterVolume.getValue()));
     };
