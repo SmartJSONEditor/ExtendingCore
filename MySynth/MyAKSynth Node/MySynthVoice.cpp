@@ -20,7 +20,7 @@ namespace AudioKitCore
         noteNumber = -1;
 
         drawBarOsc.init(sampleRate, pOscStack);
-        drawBarOsc.setDrawbars(pParameters->organ.drawbars);
+        drawBarOsc.level = pParameters->organ.drawbars;
 
         ampEG.init();
     }
@@ -30,7 +30,6 @@ namespace AudioKitCore
         event = evt;
         noteVolume = volume;
         drawBarOsc.setFrequency(frequency);
-        drawBarOsc.setDrawbars(pParameters->organ.drawbars);
         ampEG.start();
 
         noteFrequency = frequency;

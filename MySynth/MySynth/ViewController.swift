@@ -136,7 +136,11 @@ extension ViewController: AKMIDIListener {
 
     func receivedMIDINoteOn(noteNumber: MIDINoteNumber, velocity: MIDIVelocity, channel: MIDIChannel) {
         DispatchQueue.main.async {
-            self.conductor.playNote(note: noteNumber, velocity: velocity, channel: channel)
+            if (velocity == 0) {
+                self.conductor.stopNote(note: noteNumber, channel: channel);
+            } else {
+                self.conductor.playNote(note: noteNumber, velocity: velocity, channel: channel)
+            }
         }
     }
 

@@ -107,7 +107,6 @@ class Conductor {
         case AKMIDIControl.modulationWheel.rawValue:
             synth.vibratoDepth = 0.5 * Double(value) / 128.0
         case AKMIDIControl.damperOnOff.rawValue:
-            // key-up, key-down and pedal operations are mediated by SDSustainer
             synth.sustainPedal(pedalDown: value != 0)
         default:
             break
