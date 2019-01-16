@@ -29,7 +29,7 @@ namespace AudioKitCore
     {
         event = evt;
         noteVolume = volume;
-        drawBarOsc.setFrequency(frequency);
+        drawBarOsc.setFrequency(0.5f * frequency);
         ampEG.start();
 
         noteFrequency = frequency;
@@ -82,7 +82,7 @@ namespace AudioKitCore
                 if (newNoteNumber >= 0)
                 {
                     // restarting a "stolen" voice with a new note number
-                    drawBarOsc.setFrequency(noteFrequency);
+                    drawBarOsc.setFrequency(0.5f * noteFrequency);
                     noteNumber = newNoteNumber;
                 }
                 ampEG.start();

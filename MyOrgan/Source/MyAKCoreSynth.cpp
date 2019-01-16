@@ -47,6 +47,10 @@ MyAKCoreSynth::MyAKCoreSynth()
         data->voice[i].noteNumber = -1;
         data->voice[i].ampEG.pParameters = &data->ampEGParameters;
     }
+
+    memset(data->voiceParameters.organ.drawbars, 0, 16 * sizeof(float));
+    data->voiceParameters.organ.drawbars[1] = 1.0f;
+    data->voiceParameters.organ.mixLevel = 0.4f;
 }
 
 MyAKCoreSynth::~MyAKCoreSynth()
@@ -67,10 +71,6 @@ int MyAKCoreSynth::init(double sampleRate)
     data->vibratoLFO.waveTable.sinusoid();
     data->vibratoLFO.init(sampleRate/AKSYNTH_CHUNKSIZE, 5.0f);
     
-    memset(data->voiceParameters.organ.drawbars, 0, 16 * sizeof(float));
-    data->voiceParameters.organ.drawbars[0] = 1.0f;
-    data->voiceParameters.organ.mixLevel = 0.4f;
-
     data->ampEGParameters.setAttackDurationSeconds(0.01f);
     data->ampEGParameters.setReleaseDurationSeconds(0.01f);
 

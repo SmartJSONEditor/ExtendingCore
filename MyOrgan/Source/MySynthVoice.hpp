@@ -34,8 +34,8 @@ namespace AudioKitCore
 
         unsigned event;     // last "event number" associated with this voice
         int noteNumber;     // MIDI note number, or -1 if not playing any note
-        float noteFrequency;// note frequency in Hz
-        float noteVolume;      // fraction 0.0 - 1.0, based on MIDI velocity
+        float noteFrequency;// note frequency in Hz (drawBarOsc runs at half this rate)
+        float noteVolume;   // fraction 0.0 - 1.0, based on MIDI velocity
 
         // temporary holding variables
         int newNoteNumber;  // holds new note number while damping note before restarting
