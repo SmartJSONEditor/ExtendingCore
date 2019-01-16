@@ -36,9 +36,10 @@ struct MyAKCoreSynth::InternalData
 MyAKCoreSynth::MyAKCoreSynth()
 : data(new InternalData)
 , eventCounter(0)
-, masterVolume(1.0f)
+, masterVolume(0.2f)
 , pitchOffset(0.0f)
 , vibratoDepth(0.0f)
+, velocitySensitivity(0.1f)
 {
     for (int i=0; i < MAX_VOICE_COUNT; i++)
     {
@@ -123,6 +124,11 @@ AudioKitCore::MySynthVoice *MyAKCoreSynth::voicePlayingNote(unsigned noteNumber)
     return 0;
 }
 
+float MyAKCoreSynth::velToLevel(int midiVelocity)
+{
+    return (1.0f - velocitySensitivity) + velocitySensitivity * midiVelocity / 127.0f;
+}
+
 void MyAKCoreSynth::play(unsigned noteNumber, unsigned velocity, float noteFrequency)
 {
     //printf("playNote nn=%d vel=%d %.2f Hz\n", noteNumber, velocity, noteFrequency);
@@ -132,7 +138,7 @@ void MyAKCoreSynth::play(unsigned noteNumber, unsigned velocity, float noteFrequ
     if (pVoice)
     {
         // re-start the note
-        pVoice->restart(eventCounter, velocity / 127.0f);
+        pVoice->restart(eventCounter, velToLevel(velocity));
         //printf("Restart note %d as %d\n", noteNumber, pVoice->noteNumber);
         return;
     }
@@ -144,7 +150,7 @@ void MyAKCoreSynth::play(unsigned noteNumber, unsigned velocity, float noteFrequ
         if (pVoice->noteNumber < 0)
         {
             // found a free voice: assign it to play this note
-            pVoice->start(eventCounter, noteNumber, noteFrequency, velocity / 127.0f);
+            pVoice->start(eventCounter, noteNumber, noteFrequency, velToLevel(velocity));
             //printf("Play note %d (%.2f Hz) vel %d\n", noteNumber, noteFrequency, velocity);
             return;
         }
@@ -178,13 +184,13 @@ void MyAKCoreSynth::play(unsigned noteNumber, unsigned velocity, float noteFrequ
     {
         // We have a stalest note in its release phase: restart that one
         //printf("Restart note %d in release phase as %d\n", noteNumber, pVoice->noteNumber);
-        pStalestVoiceInRelease->restart(eventCounter, noteNumber, noteFrequency, velocity / 127.0f);
+        pStalestVoiceInRelease->restart(eventCounter, noteNumber, noteFrequency, velToLevel(velocity));
     }
     else
     {
         // No notes in release phase: restart the "stalest" one we could find
         //printf("Restart stalest note %d as %d\n", noteNumber, pVoice->noteNumber);
-        pStalestVoiceOfAll->restart(eventCounter, noteNumber, noteFrequency, velocity / 127.0f);
+        pStalestVoiceOfAll->restart(eventCounter, noteNumber, noteFrequency, velToLevel(velocity));
     }
 }
 

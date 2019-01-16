@@ -48,6 +48,10 @@ public:
     // 9 Hammond-style drawbars
     void setDrawBar(int index, float value);
     float getDrawBar(int index);
+
+    // Velocity sensitivity: range 0 to 1, default 0
+    void setVelocitySensitivity(float sens);
+    float getVelocitySensitivity() { return velocitySensitivity; }
     
     void render(unsigned channelCount, unsigned sampleCount, float *outBuffers[]);
     
@@ -61,6 +65,9 @@ protected:
     
     // performance parameters
     float masterVolume, pitchOffset, vibratoDepth;
+    float velocitySensitivity;
+
+    float velToLevel(int midiVelocity);
     
     void play(unsigned noteNumber, unsigned velocity, float noteFrequency);
     void stop(unsigned noteNumber, bool immediate);
