@@ -28,6 +28,7 @@ namespace AudioKitCore
         float tempGain;     // product of global volume, note volume, and amp EG
 
         VoiceBase() : pTimbreParams(0), pModParams(0), event(0), noteNumber(-1) {}
+        virtual ~VoiceBase() = default;
 
         void init(double sampleRate, void* pTimbreParameters, void* pModParameters);
 

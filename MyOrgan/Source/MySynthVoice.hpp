@@ -38,6 +38,7 @@ namespace AudioKitCore
         ADSREnvelope ampEG;
 
         MySynthVoice() : VoiceBase() {}
+        virtual ~MySynthVoice() = default;
 
         void init(double sampleRate,
                   WaveStack *pOscStack,
@@ -49,11 +50,11 @@ namespace AudioKitCore
         void start(unsigned evt, unsigned noteNum, unsigned velocity, float freqHz, float volume) override;
         void restart(unsigned evt, unsigned noteNum, unsigned velocity, float freqHz, float volume) override;
         void release(unsigned evt) override;
-        bool isReleasing(void) { return ampEG.isReleasing(); }
+        bool isReleasing(void) override { return ampEG.isReleasing(); }
         void stop(unsigned evt) override;
 
         // return true if amp envelope is finished
-        bool doModulation(void);
-        bool getSamples(int sampleCount, float *leftOuput, float *rightOutput);
+        bool doModulation(void) override;
+        bool getSamples(int sampleCount, float *leftOuput, float *rightOutput) override;
     };
 }
