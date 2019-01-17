@@ -3,8 +3,16 @@
 <JUCERPROJECT id="IXkp6K" name="MyOrgan" projectType="audioplug" jucerVersion="5.4.1"
               companyName="AudioKit" pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
               pluginFormats="buildAU,buildStandalone,buildVST" pluginDesc="Test wrapper for Core Synth"
-              pluginManufacturerCode="AKit" pluginChannelConfigs="{0, 2}" headerPath="../../../../AudioKit/AudioKit/Core/AudioKitCore/Common&#10;../../../../AudioKit/AudioKit/Core/AudioKitCore/Synth&#10;../../../../AudioKit/AudioKit/Core/Soundpipe/lib/kissfft&#10;../../../Leslie/Source">
+              pluginManufacturerCode="AKit" pluginChannelConfigs="{0, 2}" headerPath="../../../../AudioKit/AudioKit/Core/AudioKitCore/Common&#10;../../../../AudioKit/AudioKit/Core/AudioKitCore/Synth&#10;../../../../AudioKit/AudioKit/Core/Soundpipe/lib/kissfft&#10;../../../Leslie/Source&#10;../../../Common">
   <MAINGROUP id="HQPykZ" name="MyOrgan">
+    <GROUP id="{2E86CEC3-CFB9-38D9-29D3-EE5DE73CD565}" name="Common">
+      <FILE id="IDrQ5C" name="VoiceBase.cpp" compile="1" resource="0" file="../Common/VoiceBase.cpp"/>
+      <FILE id="FVqDgd" name="VoiceBase.hpp" compile="0" resource="0" file="../Common/VoiceBase.hpp"/>
+      <FILE id="FYycnd" name="VoiceManager.cpp" compile="1" resource="0"
+            file="../Common/VoiceManager.cpp"/>
+      <FILE id="jwi29x" name="VoiceManager.hpp" compile="0" resource="0"
+            file="../Common/VoiceManager.hpp"/>
+    </GROUP>
     <GROUP id="{BEC9FCE7-FC91-A73C-5344-B3E6DDD2BDE9}" name="Leslie">
       <FILE id="qCavkl" name="b_whirl.h" compile="0" resource="0" file="../Leslie/Source/b_whirl.h"/>
       <FILE id="OImWFU" name="eqcomp.c" compile="1" resource="0" file="../Leslie/Source/eqcomp.c"/>

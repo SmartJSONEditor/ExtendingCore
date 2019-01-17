@@ -11,31 +11,28 @@
 
 #define AKSYNTH_CHUNKSIZE 16            // process samples in "chunks" this size
 
-namespace AudioKitCore
-{
-    struct MySynthVoice;
-}
-
 class MyAKCoreSynth
 {
 public:
     MyAKCoreSynth();
     ~MyAKCoreSynth();
-    
-    /// returns system error code, nonzero only if a problem occurs
+
     int init(double sampleRate);
-    
-    /// call this to un-load all samples and clear the keymap
     void deinit();
-    
+
     void playNote(unsigned noteNumber, unsigned velocity, float noteFrequency);
     void stopNote(unsigned noteNumber, bool immediate);
     void sustainPedal(bool down);
-    void setMasterVolume(float vol) { masterVolume = vol; }
-    float getMasterVolume() { return masterVolume; }
+
+    void setMasterVolume(float vol);
+    float getMasterVolume();
+
     void setPitchOffset(float offset) { pitchOffset = offset; }
+    float getPitchOffset() { return pitchOffset; }
+
     void setVibratoDepth(float depth) { vibratoDepth = depth; }
-    
+    float getVibratoDepth() { return vibratoDepth; }
+
     void  setAmpAttackDurationSeconds(float value);
     float getAmpAttackDurationSeconds(void);
     void  setAmpDecayDurationSeconds(float value);
@@ -45,34 +42,34 @@ public:
     void  setAmpReleaseDurationSeconds(float value);
     float getAmpReleaseDurationSeconds(void);
 
-    // 9 Hammond-style drawbars
+    // 9 Hammond-style drawbars...
     void setDrawBar(int index, float value);
     float getDrawBar(int index);
+    // ...OR 16 harmonic partials
+    void setHarmonicLevel(int index, float value);
+    float getHarmonicLevel(int index);
 
     // Velocity sensitivity: range 0 to 1, default 0
     void setVelocitySensitivity(float sens);
-    float getVelocitySensitivity() { return velocitySensitivity; }
+    float getVelocitySensitivity();
+
+    // Tuning ratio: set e.g. 0.5 to play 1 octave below MIDI pitch
+    void setTuningRatio(float ratio) { tuningRatio = ratio; }
+    float getTuningRatio() { return tuningRatio; }
     
     void render(unsigned channelCount, unsigned sampleCount, float *outBuffers[]);
-    
+
 protected:
  
     struct InternalData;
     std::unique_ptr<InternalData> data;
 
-    /// "event" counter for voice-stealing (reallocation)
-    unsigned eventCounter;
-    
     // performance parameters
-    float masterVolume, pitchOffset, vibratoDepth;
-    float velocitySensitivity;
+    float pitchOffset, vibratoDepth;
+    float tuningRatio;
 
-    float velToLevel(int midiVelocity);
-    
-    void play(unsigned noteNumber, unsigned velocity, float noteFrequency);
-    void stop(unsigned noteNumber, bool immediate);
-    
-    AudioKitCore::MySynthVoice *voicePlayingNote(unsigned noteNumber);
+    // render-prep callback
+    static void renderPrepCallback(void* thisPtr);
 };
 
 #endif

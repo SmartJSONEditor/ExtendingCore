@@ -453,7 +453,7 @@ void Leslie::process(uint32_t n_samples, const float* in, float* outL, float* ou
 void Leslie::render(int n_samples, const float* inBuffers[2], float* outBuffers[2])
 {
     const float* inLeft = inBuffers[0];
-    const float* inRight = inBuffers[1];
+    //const float* inRight = inBuffers[1];
     float* outLeft = outBuffers[0];
     float* outRight = outBuffers[1];
 

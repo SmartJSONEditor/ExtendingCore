@@ -13,96 +13,83 @@ namespace AudioKitCore
 {
     void MySynthVoice::init(double sampleRate,
                             WaveStack *pOscStack,
-                            MySynthVoiceParameters *pParams)
+                            MySynthVoiceParameters* pTimbreParameters,
+                            MySynthModParameters* pModParameters)
     {
-        pParameters = pParams;
-        event = 0;
-        noteNumber = -1;
+        VoiceBase::init(sampleRate, pTimbreParameters, pModParameters);
 
         drawBarOsc.init(sampleRate, pOscStack);
-        drawBarOsc.level = pParameters->organ.drawbars;
+        drawBarOsc.level = pTimbreParameters->organ.drawbars;
 
         ampEG.init();
     }
 
-    void MySynthVoice::start(unsigned evt, unsigned noteNum, float frequency, float volume)
+    void MySynthVoice::start(unsigned evt, unsigned noteNum, unsigned velocity, float freqHz, float volume)
     {
-        event = evt;
-        noteVolume = volume;
-        drawBarOsc.setFrequency(0.5f * frequency);
+        drawBarOsc.setFrequency(0.5f * freqHz);
         ampEG.start();
-
-        noteFrequency = frequency;
-        this->noteNumber = noteNum;
+        VoiceBase::start(evt, noteNum, velocity, freqHz, volume);
     }
 
-    void MySynthVoice::restart(unsigned evt, float volume)
+    void MySynthVoice::restart(unsigned evt, unsigned noteNum, unsigned velocity, float freqHz, float volume)
     {
-        event = evt;
-        newNoteNumber = -1;
-        newNoteVol = volume;
         ampEG.restart();
-    }
-
-    void MySynthVoice::restart(unsigned evt, unsigned noteNum, float frequency, float volume)
-    {
-        event = evt;
-        newNoteNumber = noteNum;
-        newNoteVol = volume;
-        noteFrequency = frequency;
-        ampEG.restart();
+        VoiceBase::restart(evt, noteNum, velocity, freqHz, volume);
     }
 
     void MySynthVoice::release(unsigned evt)
     {
-        event = evt;
         ampEG.release();
+        VoiceBase::release(evt);
     }
 
     void MySynthVoice::stop(unsigned evt)
     {
-        event = evt;
-        noteNumber = -1;
+        VoiceBase::stop(evt);
         ampEG.reset();
     }
 
-    bool MySynthVoice::prepToGetSamples(float masterVolume, float phaseDeltaMultiplier)
+    bool MySynthVoice::doModulation(void)
     {
         if (ampEG.isIdle()) return true;
+
+        MySynthModParameters* pMod = (MySynthModParameters*)pModParams;
 
         if (ampEG.isPreStarting())
         {
             float ampeg = ampEG.getSample();
-            tempGain = masterVolume * noteVolume * ampeg;
+            tempGain = pMod->masterVol * noteVol * ampeg;
             if (!ampEG.isPreStarting())
             {
-                noteVolume = newNoteVol;
-                tempGain = masterVolume * noteVolume * ampeg;
+                noteVol = newNoteVol;
+                tempGain = pMod->masterVol * noteVol * ampeg;
 
                 if (newNoteNumber >= 0)
                 {
                     // restarting a "stolen" voice with a new note number
-                    drawBarOsc.setFrequency(0.5f * noteFrequency);
+                    drawBarOsc.setFrequency(0.5f * noteHz);
                     noteNumber = newNoteNumber;
                 }
                 ampEG.start();
             }
         }
         else
-            tempGain = masterVolume * noteVolume * ampEG.getSample();
+            tempGain = pMod->masterVol * noteVol * ampEG.getSample();
 
-        drawBarOsc.phaseDeltaMultiplier = phaseDeltaMultiplier;
+        drawBarOsc.phaseDeltaMultiplier = pMod->phaseDeltaMul;
 
         return false;
     }
 
     bool MySynthVoice::getSamples(int sampleCount, float *leftOutput, float *rightOutput)
     {
+        MySynthVoiceParameters* pParams = (MySynthVoiceParameters*)pTimbreParams;
+
         for (int i=0; i < sampleCount; i++)
         {
             float leftSample = 0.0f;
             float rightSample = 0.0f;
-            drawBarOsc.getSamples(&leftSample, &rightSample, pParameters->organ.mixLevel);
+            drawBarOsc.getSamples(&leftSample, &rightSample, pParams->organ.mixLevel);
             *leftOutput++ += tempGain * leftSample;
             *rightOutput++ += tempGain * rightSample;
         }
