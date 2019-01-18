@@ -1,0 +1,462 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		34A6AC5221F25A5200E9C570 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A6AC5121F25A5200E9C570 /* AppDelegate.swift */; };
+		34A6AC5421F25A5200E9C570 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A6AC5321F25A5200E9C570 /* ViewController.swift */; };
+		34A6AC5621F25A5300E9C570 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34A6AC5521F25A5300E9C570 /* Assets.xcassets */; };
+		34A6AC5921F25A5300E9C570 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34A6AC5721F25A5300E9C570 /* Main.storyboard */; };
+		34A6AC6421F25B0A00E9C570 /* AudioKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34A6AC6221F25B0A00E9C570 /* AudioKitUI.framework */; };
+		34A6AC6521F25B0A00E9C570 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34A6AC6321F25B0A00E9C570 /* AudioKit.framework */; };
+		34A6AC6821F25C6500E9C570 /* Conductor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A6AC6721F25C6500E9C570 /* Conductor.swift */; };
+		34A6AC9A21F2625300E9C570 /* OrganVoice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34A6AC9521F2625300E9C570 /* OrganVoice.cpp */; };
+		34A6AC9B21F2625300E9C570 /* Distortion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34A6AC9621F2625300E9C570 /* Distortion.cpp */; };
+		34A6AC9C21F2625300E9C570 /* Organ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34A6AC9721F2625300E9C570 /* Organ.cpp */; };
+		34A6ACA221F2630E00E9C570 /* VoiceBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34A6AC9E21F2630E00E9C570 /* VoiceBase.cpp */; };
+		34A6ACA321F2630E00E9C570 /* VoiceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34A6ACA021F2630E00E9C570 /* VoiceManager.cpp */; };
+		34A6ACC121F2638E00E9C570 /* eqcomp.c in Sources */ = {isa = PBXBuildFile; fileRef = 34A6ACB821F2638E00E9C570 /* eqcomp.c */; };
+		34A6ACC221F2638E00E9C570 /* Leslie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34A6ACB921F2638E00E9C570 /* Leslie.cpp */; };
+		34A6ACC521F2638E00E9C570 /* whirl.c in Sources */ = {isa = PBXBuildFile; fileRef = 34A6ACBF21F2638E00E9C570 /* whirl.c */; };
+		34A6AD0021F267BD00E9C570 /* AKOrgan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A6ACFC21F267BD00E9C570 /* AKOrgan.swift */; };
+		34A6AD0121F267BD00E9C570 /* AKOrganDSP.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34A6ACFD21F267BD00E9C570 /* AKOrganDSP.mm */; };
+		34A6AD0221F267BD00E9C570 /* AKOrganAudioUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A6ACFE21F267BD00E9C570 /* AKOrganAudioUnit.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		34A6AC4E21F25A5200E9C570 /* AKOrgan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AKOrgan.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		34A6AC5121F25A5200E9C570 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		34A6AC5321F25A5200E9C570 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		34A6AC5521F25A5300E9C570 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		34A6AC5821F25A5300E9C570 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		34A6AC5A21F25A5300E9C570 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		34A6AC5B21F25A5300E9C570 /* AKOrgan.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AKOrgan.entitlements; sourceTree = "<group>"; };
+		34A6AC6221F25B0A00E9C570 /* AudioKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioKitUI.framework; path = "../../AudioKit/Frameworks/AudioKit-macOS/AudioKitUI.framework"; sourceTree = "<group>"; };
+		34A6AC6321F25B0A00E9C570 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioKit.framework; path = "../../AudioKit/Frameworks/AudioKit-macOS/AudioKit.framework"; sourceTree = "<group>"; };
+		34A6AC6721F25C6500E9C570 /* Conductor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conductor.swift; sourceTree = "<group>"; };
+		34A6AC9421F2625300E9C570 /* Organ.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Organ.hpp; sourceTree = "<group>"; };
+		34A6AC9521F2625300E9C570 /* OrganVoice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OrganVoice.cpp; sourceTree = "<group>"; };
+		34A6AC9621F2625300E9C570 /* Distortion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Distortion.cpp; sourceTree = "<group>"; };
+		34A6AC9721F2625300E9C570 /* Organ.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Organ.cpp; sourceTree = "<group>"; };
+		34A6AC9821F2625300E9C570 /* OrganVoice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OrganVoice.hpp; sourceTree = "<group>"; };
+		34A6AC9921F2625300E9C570 /* Distortion.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Distortion.hpp; sourceTree = "<group>"; };
+		34A6AC9E21F2630E00E9C570 /* VoiceBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VoiceBase.cpp; sourceTree = "<group>"; };
+		34A6AC9F21F2630E00E9C570 /* VoiceManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VoiceManager.hpp; sourceTree = "<group>"; };
+		34A6ACA021F2630E00E9C570 /* VoiceManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VoiceManager.cpp; sourceTree = "<group>"; };
+		34A6ACA121F2630E00E9C570 /* VoiceBase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VoiceBase.hpp; sourceTree = "<group>"; };
+		34A6ACB721F2638E00E9C570 /* whirl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = whirl.h; path = ../Leslie/Source/whirl.h; sourceTree = "<group>"; };
+		34A6ACB821F2638E00E9C570 /* eqcomp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = eqcomp.c; path = ../Leslie/Source/eqcomp.c; sourceTree = "<group>"; };
+		34A6ACB921F2638E00E9C570 /* Leslie.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Leslie.cpp; path = ../Leslie/Source/Leslie.cpp; sourceTree = "<group>"; };
+		34A6ACBC21F2638E00E9C570 /* b_whirl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = b_whirl.h; path = ../Leslie/Source/b_whirl.h; sourceTree = "<group>"; };
+		34A6ACBE21F2638E00E9C570 /* eqcomp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = eqcomp.h; path = ../Leslie/Source/eqcomp.h; sourceTree = "<group>"; };
+		34A6ACBF21F2638E00E9C570 /* whirl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = whirl.c; path = ../Leslie/Source/whirl.c; sourceTree = "<group>"; };
+		34A6ACC021F2638E00E9C570 /* Leslie.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Leslie.hpp; path = ../Leslie/Source/Leslie.hpp; sourceTree = "<group>"; };
+		34A6ACFC21F267BD00E9C570 /* AKOrgan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKOrgan.swift; sourceTree = "<group>"; };
+		34A6ACFD21F267BD00E9C570 /* AKOrganDSP.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AKOrganDSP.mm; sourceTree = "<group>"; };
+		34A6ACFE21F267BD00E9C570 /* AKOrganAudioUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKOrganAudioUnit.swift; sourceTree = "<group>"; };
+		34A6ACFF21F267BD00E9C570 /* AKOrganDSP.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AKOrganDSP.hpp; sourceTree = "<group>"; };
+		34A6AD0321F267F000E9C570 /* AKOrgan-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AKOrgan-Bridging-Header.h"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		34A6AC4B21F25A5200E9C570 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34A6AC6421F25B0A00E9C570 /* AudioKitUI.framework in Frameworks */,
+				34A6AC6521F25B0A00E9C570 /* AudioKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		34A6AC4521F25A5200E9C570 = {
+			isa = PBXGroup;
+			children = (
+				34A6ACB521F2637D00E9C570 /* Leslie */,
+				34A6AC9D21F2630E00E9C570 /* Common */,
+				34A6AC9321F2625300E9C570 /* Node */,
+				34A6AC5021F25A5200E9C570 /* AKOrgan */,
+				34A6AC4F21F25A5200E9C570 /* Products */,
+				34A6AC6121F25B0A00E9C570 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		34A6AC4F21F25A5200E9C570 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				34A6AC4E21F25A5200E9C570 /* AKOrgan.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		34A6AC5021F25A5200E9C570 /* AKOrgan */ = {
+			isa = PBXGroup;
+			children = (
+				34A6AC6721F25C6500E9C570 /* Conductor.swift */,
+				34A6AC5121F25A5200E9C570 /* AppDelegate.swift */,
+				34A6AC5321F25A5200E9C570 /* ViewController.swift */,
+				34A6AC5521F25A5300E9C570 /* Assets.xcassets */,
+				34A6AC5721F25A5300E9C570 /* Main.storyboard */,
+				34A6AC5A21F25A5300E9C570 /* Info.plist */,
+				34A6AC5B21F25A5300E9C570 /* AKOrgan.entitlements */,
+			);
+			path = AKOrgan;
+			sourceTree = "<group>";
+		};
+		34A6AC6121F25B0A00E9C570 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				34A6AC6321F25B0A00E9C570 /* AudioKit.framework */,
+				34A6AC6221F25B0A00E9C570 /* AudioKitUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		34A6AC9321F2625300E9C570 /* Node */ = {
+			isa = PBXGroup;
+			children = (
+				34A6ACFC21F267BD00E9C570 /* AKOrgan.swift */,
+				34A6ACFE21F267BD00E9C570 /* AKOrganAudioUnit.swift */,
+				34A6ACFF21F267BD00E9C570 /* AKOrganDSP.hpp */,
+				34A6ACFD21F267BD00E9C570 /* AKOrganDSP.mm */,
+				34A6AC9921F2625300E9C570 /* Distortion.hpp */,
+				34A6AC9621F2625300E9C570 /* Distortion.cpp */,
+				34A6AC9421F2625300E9C570 /* Organ.hpp */,
+				34A6AC9721F2625300E9C570 /* Organ.cpp */,
+				34A6AC9821F2625300E9C570 /* OrganVoice.hpp */,
+				34A6AC9521F2625300E9C570 /* OrganVoice.cpp */,
+				34A6AD0321F267F000E9C570 /* AKOrgan-Bridging-Header.h */,
+			);
+			path = Node;
+			sourceTree = "<group>";
+		};
+		34A6AC9D21F2630E00E9C570 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				34A6AC9E21F2630E00E9C570 /* VoiceBase.cpp */,
+				34A6AC9F21F2630E00E9C570 /* VoiceManager.hpp */,
+				34A6ACA021F2630E00E9C570 /* VoiceManager.cpp */,
+				34A6ACA121F2630E00E9C570 /* VoiceBase.hpp */,
+			);
+			name = Common;
+			path = ../Common;
+			sourceTree = "<group>";
+		};
+		34A6ACB521F2637D00E9C570 /* Leslie */ = {
+			isa = PBXGroup;
+			children = (
+				34A6ACBC21F2638E00E9C570 /* b_whirl.h */,
+				34A6ACB821F2638E00E9C570 /* eqcomp.c */,
+				34A6ACBE21F2638E00E9C570 /* eqcomp.h */,
+				34A6ACB921F2638E00E9C570 /* Leslie.cpp */,
+				34A6ACC021F2638E00E9C570 /* Leslie.hpp */,
+				34A6ACBF21F2638E00E9C570 /* whirl.c */,
+				34A6ACB721F2638E00E9C570 /* whirl.h */,
+			);
+			name = Leslie;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		34A6AC4D21F25A5200E9C570 /* AKOrgan */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 34A6AC5E21F25A5300E9C570 /* Build configuration list for PBXNativeTarget "AKOrgan" */;
+			buildPhases = (
+				34A6AC4A21F25A5200E9C570 /* Sources */,
+				34A6AC4B21F25A5200E9C570 /* Frameworks */,
+				34A6AC4C21F25A5200E9C570 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AKOrgan;
+			productName = AKOrgan;
+			productReference = 34A6AC4E21F25A5200E9C570 /* AKOrgan.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		34A6AC4621F25A5200E9C570 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = AudioKit;
+				TargetAttributes = {
+					34A6AC4D21F25A5200E9C570 = {
+						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 34A6AC4921F25A5200E9C570 /* Build configuration list for PBXProject "AKOrgan" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 34A6AC4521F25A5200E9C570;
+			productRefGroup = 34A6AC4F21F25A5200E9C570 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				34A6AC4D21F25A5200E9C570 /* AKOrgan */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		34A6AC4C21F25A5200E9C570 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34A6AC5621F25A5300E9C570 /* Assets.xcassets in Resources */,
+				34A6AC5921F25A5300E9C570 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		34A6AC4A21F25A5200E9C570 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34A6ACA221F2630E00E9C570 /* VoiceBase.cpp in Sources */,
+				34A6AC9A21F2625300E9C570 /* OrganVoice.cpp in Sources */,
+				34A6ACC121F2638E00E9C570 /* eqcomp.c in Sources */,
+				34A6ACA321F2630E00E9C570 /* VoiceManager.cpp in Sources */,
+				34A6ACC521F2638E00E9C570 /* whirl.c in Sources */,
+				34A6AC5421F25A5200E9C570 /* ViewController.swift in Sources */,
+				34A6AC9B21F2625300E9C570 /* Distortion.cpp in Sources */,
+				34A6AC6821F25C6500E9C570 /* Conductor.swift in Sources */,
+				34A6AD0221F267BD00E9C570 /* AKOrganAudioUnit.swift in Sources */,
+				34A6AD0121F267BD00E9C570 /* AKOrganDSP.mm in Sources */,
+				34A6AC5221F25A5200E9C570 /* AppDelegate.swift in Sources */,
+				34A6AC9C21F2625300E9C570 /* Organ.cpp in Sources */,
+				34A6ACC221F2638E00E9C570 /* Leslie.cpp in Sources */,
+				34A6AD0021F267BD00E9C570 /* AKOrgan.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		34A6AC5721F25A5300E9C570 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				34A6AC5821F25A5300E9C570 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		34A6AC5C21F25A5300E9C570 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		34A6AC5D21F25A5300E9C570 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		34A6AC5F21F25A5300E9C570 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 9W69ZP8S5F;
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../../AudioKit/Frameworks/AudioKit-macOS\"";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../AudioKit/AudioKit/Common/Internals/CoreAudio\"/**",
+					"\"$(SRCROOT)/../../AudioKit/AudioKit/Common/Internals/Utilities\"/**",
+					"\"$(SRCROOT)/../../AudioKit/AudioKit/Core/AudioKitCore\"/**",
+				);
+				INFOPLIST_FILE = AKOrgan/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				OTHER_LDFLAGS = "-lstdc++";
+				PRODUCT_BUNDLE_IDENTIFIER = io.audiokit.AKOrgan;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Node/AKOrgan-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		34A6AC6021F25A5300E9C570 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 9W69ZP8S5F;
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../../AudioKit/Frameworks/AudioKit-macOS\"";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../AudioKit/AudioKit/Common/Internals/CoreAudio\"/**",
+					"\"$(SRCROOT)/../../AudioKit/AudioKit/Common/Internals/Utilities\"/**",
+					"\"$(SRCROOT)/../../AudioKit/AudioKit/Core/AudioKitCore\"/**",
+				);
+				INFOPLIST_FILE = AKOrgan/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				OTHER_LDFLAGS = "-lstdc++";
+				PRODUCT_BUNDLE_IDENTIFIER = io.audiokit.AKOrgan;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Node/AKOrgan-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		34A6AC4921F25A5200E9C570 /* Build configuration list for PBXProject "AKOrgan" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34A6AC5C21F25A5300E9C570 /* Debug */,
+				34A6AC5D21F25A5300E9C570 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		34A6AC5E21F25A5300E9C570 /* Build configuration list for PBXNativeTarget "AKOrgan" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34A6AC5F21F25A5300E9C570 /* Debug */,
+				34A6AC6021F25A5300E9C570 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 34A6AC4621F25A5200E9C570 /* Project object */;
+}
