@@ -34,7 +34,11 @@ namespace AudioKitCore
         // Velocity sensitivity: range 0 to 1, default 0
         void setVelocitySensitivity(float sens) { velocitySensitivity = sens; }
         float getVelocitySensitivity() { return velocitySensitivity; }
-        
+
+        // Tuning ratio: set e.g. 0.5 to play 1 octave below MIDI pitch
+        void setTuningRatio(float ratio) { tuningRatio = ratio; }
+        float getTuningRatio() { return tuningRatio; }
+
         void playNote(unsigned noteNumber, unsigned velocity, float noteHz);
         void stopNote(unsigned noteNumber, bool immediate);
         void sustainPedal(bool down);
@@ -60,6 +64,9 @@ namespace AudioKitCore
         // velocity-to-volume conversion
         float velocitySensitivity;
         float velToLevel(int midiVelocity);
+
+        // Tuning ratio: set e.g. 0.5 to play 1 octave below MIDI pitch
+        float tuningRatio;
 
         // actually start/stop notes
         void play(unsigned noteNumber, unsigned velocity, float noteHz);

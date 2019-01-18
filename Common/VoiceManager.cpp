@@ -15,6 +15,7 @@ namespace AudioKitCore {
     , nCurrentPolyphony(0)
     , eventCounter(0)
     , velocitySensitivity(1.0f)
+    , tuningRatio(1.0f)
     , doRenderPrep(0)
     {
     }

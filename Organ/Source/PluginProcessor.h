@@ -1,6 +1,6 @@
 #pragma once
 #include "JuceHeader.h"
-#include "MyAKCoreSynth.hpp"
+#include "Organ.hpp"
 #include "Leslie.hpp"
 #include "Distortion.hpp"
 
@@ -39,7 +39,7 @@ public:
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
-    MyAKCoreSynth synth;
+    Organ synth;
     AudioKitCore::Distortion distortion;
     Leslie leslie;
 

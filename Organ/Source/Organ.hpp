@@ -1,5 +1,5 @@
 //
-//  MyAKCoreSynth.hpp
+//  Organ.hpp
 //  AudioKit Core
 //
 //  Created by Shane Dunne, revision history on Github.
@@ -11,11 +11,11 @@
 
 #define AKSYNTH_CHUNKSIZE 16            // process samples in "chunks" this size
 
-class MyAKCoreSynth
+class Organ
 {
 public:
-    MyAKCoreSynth();
-    ~MyAKCoreSynth();
+    Organ();
+    ~Organ();
 
     int init(double sampleRate);
     void deinit();
@@ -23,9 +23,6 @@ public:
     void playNote(unsigned noteNumber, unsigned velocity, float noteFrequency);
     void stopNote(unsigned noteNumber, bool immediate);
     void sustainPedal(bool down);
-
-    void setMasterVolume(float vol);
-    float getMasterVolume();
 
     void setPitchOffset(float offset) { pitchOffset = offset; }
     float getPitchOffset() { return pitchOffset; }
@@ -49,13 +46,17 @@ public:
     void setHarmonicLevel(int index, float value);
     float getHarmonicLevel(int index);
 
-    // Velocity sensitivity: range 0 to 1, default 0
+    // Master volume: range 0 to 1, default 1.0
+    void setMasterVolume(float vol);
+    float getMasterVolume();
+
+    // Velocity sensitivity: range 0 to 1, default 1.0
     void setVelocitySensitivity(float sens);
     float getVelocitySensitivity();
 
     // Tuning ratio: set e.g. 0.5 to play 1 octave below MIDI pitch
-    void setTuningRatio(float ratio) { tuningRatio = ratio; }
-    float getTuningRatio() { return tuningRatio; }
+    void setTuningRatio(float ratio);
+    float getTuningRatio();
     
     void render(unsigned channelCount, unsigned sampleCount, float *outBuffers[]);
 
@@ -66,7 +67,6 @@ protected:
 
     // performance parameters
     float pitchOffset, vibratoDepth;
-    float tuningRatio;
 
     // render-prep callback
     static void renderPrepCallback(void* thisPtr);

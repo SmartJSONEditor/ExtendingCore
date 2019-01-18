@@ -15,9 +15,6 @@ MyOrganAudioProcessor::MyOrganAudioProcessor()
 {
     workBuf[0] = workBuf[1] = nullptr;
 
-    synth.setTuningRatio(0.5f);
-    synth.setVelocitySensitivity(0.1f);
-
     distortion.init(512);
 }
 

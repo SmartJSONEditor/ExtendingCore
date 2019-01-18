@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="IXkp6K" name="Organ" projectType="audioplug" jucerVersion="5.4.1"
+              companyName="AudioKit" pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
+              pluginFormats="buildAU,buildStandalone,buildVST" pluginDesc="Test wrapper for Core Synth"
+              pluginManufacturerCode="AKit" pluginChannelConfigs="{0, 2}" headerPath="../../../../AudioKit/AudioKit/Core/AudioKitCore/Common&#10;../../../../AudioKit/AudioKit/Core/AudioKitCore/Synth&#10;../../../../AudioKit/AudioKit/Core/Soundpipe/lib/kissfft&#10;../../../Leslie/Source&#10;../../../Common">
+  <MAINGROUP id="HQPykZ" name="Organ">
+    <GROUP id="{2E86CEC3-CFB9-38D9-29D3-EE5DE73CD565}" name="Common">
+      <FILE id="IDrQ5C" name="VoiceBase.cpp" compile="1" resource="0" file="../Common/VoiceBase.cpp"/>
+      <FILE id="FVqDgd" name="VoiceBase.hpp" compile="0" resource="0" file="../Common/VoiceBase.hpp"/>
+      <FILE id="FYycnd" name="VoiceManager.cpp" compile="1" resource="0"
+            file="../Common/VoiceManager.cpp"/>
+      <FILE id="jwi29x" name="VoiceManager.hpp" compile="0" resource="0"
+            file="../Common/VoiceManager.hpp"/>
+    </GROUP>
+    <GROUP id="{BEC9FCE7-FC91-A73C-5344-B3E6DDD2BDE9}" name="Leslie">
+      <FILE id="qCavkl" name="b_whirl.h" compile="0" resource="0" file="../Leslie/Source/b_whirl.h"/>
+      <FILE id="OImWFU" name="eqcomp.c" compile="1" resource="0" file="../Leslie/Source/eqcomp.c"/>
+      <FILE id="ZBhmaa" name="eqcomp.h" compile="0" resource="0" file="../Leslie/Source/eqcomp.h"/>
+      <FILE id="iCKRKZ" name="Leslie.cpp" compile="1" resource="0" file="../Leslie/Source/Leslie.cpp"/>
+      <FILE id="Dc5POm" name="Leslie.hpp" compile="0" resource="0" file="../Leslie/Source/Leslie.hpp"/>
+      <FILE id="g8JwV1" name="whirl.c" compile="1" resource="0" file="../Leslie/Source/whirl.c"/>
+      <FILE id="GVLROi" name="whirl.h" compile="0" resource="0" file="../Leslie/Source/whirl.h"/>
+    </GROUP>
+    <GROUP id="{B74F1DB5-EDCF-D1AD-5D16-621C3AB7B7A6}" name="kissfft">
+      <FILE id="ky5a3p" name="_kiss_fft_guts.h" compile="0" resource="0"
+            file="../../AudioKit/AudioKit/Core/Soundpipe/lib/kissfft/_kiss_fft_guts.h"/>
+      <FILE id="ldsc6E" name="kiss_fft.c" compile="1" resource="0" file="../../AudioKit/AudioKit/Core/Soundpipe/lib/kissfft/kiss_fft.c"/>
+      <FILE id="g4OWm7" name="kiss_fft.h" compile="0" resource="0" file="../../AudioKit/AudioKit/Core/Soundpipe/lib/kissfft/kiss_fft.h"/>
+      <FILE id="Jk8thv" name="kiss_fftr.c" compile="1" resource="0" file="../../AudioKit/AudioKit/Core/Soundpipe/lib/kissfft/kiss_fftr.c"/>
+      <FILE id="yi2gNb" name="kiss_fftr.h" compile="0" resource="0" file="../../AudioKit/AudioKit/Core/Soundpipe/lib/kissfft/kiss_fftr.h"/>
+    </GROUP>
+    <GROUP id="{1D4BA84E-E9D7-DAD1-2425-D38C5A2B26E8}" name="AudioKit">
+      <GROUP id="{E3CF89DC-F28C-6A75-F37F-FC67125CC394}" name="Common">
+        <FILE id="PlapEs" name="ADSREnvelope.cpp" compile="1" resource="0"
+              file="../../AudioKit/AudioKit/Core/AudioKitCore/Common/ADSREnvelope.cpp"/>
+        <FILE id="mPsYDP" name="ADSREnvelope.h" compile="0" resource="0" file="../../AudioKit/AudioKit/Core/AudioKitCore/Common/ADSREnvelope.h"/>
+        <FILE id="q8zNYM" name="EnvelopeGeneratorBase.cpp" compile="1" resource="0"
+              file="../../AudioKit/AudioKit/Core/AudioKitCore/Common/EnvelopeGeneratorBase.cpp"/>
+        <FILE id="d45AcI" name="EnvelopeGeneratorBase.h" compile="0" resource="0"
+              file="../../AudioKit/AudioKit/Core/AudioKitCore/Common/EnvelopeGeneratorBase.h"/>
+        <FILE id="ktjj8h" name="FunctionTable.cpp" compile="1" resource="0"
+              file="../../AudioKit/AudioKit/Core/AudioKitCore/Common/FunctionTable.cpp"/>
+        <FILE id="jJNq4x" name="FunctionTable.hpp" compile="0" resource="0"
+              file="../../AudioKit/AudioKit/Core/AudioKitCore/Common/FunctionTable.hpp"/>
+        <FILE id="VvIXHF" name="LinearRamper.hpp" compile="0" resource="0"
+              file="../../AudioKit/AudioKit/Core/AudioKitCore/Common/LinearRamper.hpp"/>
+        <FILE id="kLp9hK" name="SustainPedalLogic.cpp" compile="1" resource="0"
+              file="../../AudioKit/AudioKit/Core/AudioKitCore/Common/SustainPedalLogic.cpp"/>
+        <FILE id="Su0vBZ" name="SustainPedalLogic.hpp" compile="0" resource="0"
+              file="../../AudioKit/AudioKit/Core/AudioKitCore/Common/SustainPedalLogic.hpp"/>
+      </GROUP>
+      <GROUP id="{411A1629-B8DE-8F1C-48AB-AEFBD6DA2013}" name="Synth">
+        <FILE id="ewsMZn" name="DrawbarsOscillator.cpp" compile="1" resource="0"
+              file="../../AudioKit/AudioKit/Core/AudioKitCore/Synth/DrawbarsOscillator.cpp"/>
+        <FILE id="Frnvcw" name="DrawbarsOscillator.hpp" compile="0" resource="0"
+              file="../../AudioKit/AudioKit/Core/AudioKitCore/Synth/DrawbarsOscillator.hpp"/>
+        <FILE id="zPA3QP" name="Envelope.cpp" compile="1" resource="0" file="../../AudioKit/AudioKit/Core/AudioKitCore/Synth/Envelope.cpp"/>
+        <FILE id="AajFza" name="Envelope.hpp" compile="0" resource="0" file="../../AudioKit/AudioKit/Core/AudioKitCore/Synth/Envelope.hpp"/>
+        <FILE id="ShCIFq" name="WaveStack.cpp" compile="1" resource="0" file="../../AudioKit/AudioKit/Core/AudioKitCore/Synth/WaveStack.cpp"/>
+        <FILE id="mjohqi" name="WaveStack.hpp" compile="0" resource="0" file="../../AudioKit/AudioKit/Core/AudioKitCore/Synth/WaveStack.hpp"/>
+      </GROUP>
+    </GROUP>
+    <GROUP id="{3973922E-B962-5A59-E6CC-64EDD1FE30F5}" name="Source">
+      <FILE id="GWjQA8" name="Distortion.cpp" compile="1" resource="0" file="Source/Distortion.cpp"/>
+      <FILE id="vyAvXy" name="Distortion.hpp" compile="0" resource="0" file="Source/Distortion.hpp"/>
+      <FILE id="D6EQ97" name="Organ.cpp" compile="1" resource="0" file="Source/Organ.cpp"/>
+      <FILE id="CaB9th" name="Organ.hpp" compile="0" resource="0" file="Source/Organ.hpp"/>
+      <FILE id="mZ2RLt" name="OrganVoice.cpp" compile="1" resource="0" file="Source/OrganVoice.cpp"/>
+      <FILE id="clNeUy" name="OrganVoice.hpp" compile="0" resource="0" file="Source/OrganVoice.hpp"/>
+      <FILE id="VxwNRi" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="ijMvpm" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
+      <FILE id="CBYf2o" name="PluginEditor.cpp" compile="1" resource="0"
+            file="Source/PluginEditor.cpp"/>
+      <FILE id="JEPB2C" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+    </GROUP>
+  </MAINGROUP>
+  <EXPORTFORMATS>
+    <VS2017 targetFolder="Builds/VisualStudio2017">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug"/>
+        <CONFIGURATION isDebug="0" name="Release"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_cryptography" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_opengl" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_video" path="C:/JUCE/modules"/>
+      </MODULEPATHS>
+    </VS2017>
+    <XCODE_MAC targetFolder="Builds/MacOSX" vstLegacyFolder="/Users/shane/SDKs/VST_SDK/VST2_SDK">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug"/>
+        <CONFIGURATION isDebug="0" name="Release"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_video" path="../../juce"/>
+        <MODULEPATH id="juce_opengl" path="../../juce"/>
+        <MODULEPATH id="juce_gui_extra" path="../../juce"/>
+        <MODULEPATH id="juce_gui_basics" path="../../juce"/>
+        <MODULEPATH id="juce_graphics" path="../../juce"/>
+        <MODULEPATH id="juce_events" path="../../juce"/>
+        <MODULEPATH id="juce_data_structures" path="../../juce"/>
+        <MODULEPATH id="juce_cryptography" path="../../juce"/>
+        <MODULEPATH id="juce_core" path="../../juce"/>
+        <MODULEPATH id="juce_audio_utils" path="../../juce"/>
+        <MODULEPATH id="juce_audio_processors" path="../../juce"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../juce"/>
+        <MODULEPATH id="juce_audio_formats" path="../../juce"/>
+        <MODULEPATH id="juce_audio_devices" path="../../juce"/>
+        <MODULEPATH id="juce_audio_basics" path="../../juce"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_cryptography" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_opengl" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_video" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+  <LIVE_SETTINGS>
+    <WINDOWS/>
+    <OSX/>
+  </LIVE_SETTINGS>
+  <JUCEOPTIONS JUCE_VST3_CAN_REPLACE_VST2="0" JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
+</JUCERPROJECT>

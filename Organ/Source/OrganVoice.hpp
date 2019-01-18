@@ -1,5 +1,5 @@
 //
-//  MySynthVoice.hpp
+//  OrganVoice.hpp
 //  AudioKit Core
 //
 //  Created by Shane Dunne, revision history on Github.
@@ -21,29 +21,29 @@ namespace AudioKitCore
         float mixLevel;
     };
 
-    struct MySynthVoiceParameters
+    struct OrganVoiceParameters
     {
         OrganParameters organ;
     };
 
-    struct MySynthModParameters
+    struct OrganModParameters
     {
         float masterVol;
         float phaseDeltaMul;
     };
 
-    struct MySynthVoice : public VoiceBase
+    struct OrganVoice : public VoiceBase
     {
         DrawbarsOscillator drawBarOsc;
         ADSREnvelope ampEG;
 
-        MySynthVoice() : VoiceBase() {}
-        virtual ~MySynthVoice() = default;
+        OrganVoice() : VoiceBase() {}
+        virtual ~OrganVoice() = default;
 
         void init(double sampleRate,
                   WaveStack *pOscStack,
-                  MySynthVoiceParameters* pTimbreParameters,
-                  MySynthModParameters* pModParameters);
+                  OrganVoiceParameters* pTimbreParameters,
+                  OrganModParameters* pModParameters);
 
         void updateAmpAdsrParameters() { ampEG.updateParams(); }
 
