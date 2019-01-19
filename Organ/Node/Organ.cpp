@@ -12,6 +12,8 @@
 #include "WaveStack.hpp"
 #include "SustainPedalLogic.hpp"
 #include "VoiceManager.hpp"
+#include "Distortion.hpp"
+#include "Leslie.hpp"
 
 #include <math.h>
 #include <list>
@@ -19,15 +21,37 @@
 #define MAX_VOICE_COUNT 32      // number of voices
 #define MIDI_NOTENUMBERS 128    // MIDI offers 128 distinct note numbers
 
+namespace AudioKitCore
+{
+    struct DistortionParameters
+    {
+        float power;    // 1.0 - 2.0 typical
+        float drive;    // 1.0 - 2.5 typical
+        float output;   // 1.0 - 2.5 typical
+    };
+
+    struct LeslieParameters
+    {
+        float speed;    // 1 .. 8 (fractional part is ignored)
+    };
+}
+
 struct Organ::InternalData
 {
     /// array of voice resources, and a voice manager
     AudioKitCore::OrganVoice voice[MAX_VOICE_COUNT];
     AudioKitCore::VoiceManager voiceManager;
-    
-    AudioKitCore::WaveStack waveform;                             // WaveStacks are shared by all voice oscillators
-    AudioKitCore::FunctionTableOscillator vibratoLFO;             // one vibrato LFO shared by all voices
-    
+
+    // resources shared by all voices
+    AudioKitCore::WaveStack waveform;
+    AudioKitCore::FunctionTableOscillator vibratoLFO;
+    AudioKitCore::Distortion distortion;
+    Leslie leslie;
+
+    // a stereo buffer to contain voice data before effects processing
+    float leftWorkBuffer[CHUNKSIZE];
+    float rightWorkBuffer[CHUNKSIZE];
+
     // simple parameters
     AudioKitCore::OrganVoiceParameters voiceParameters;
     AudioKitCore::ADSREnvelopeParameters ampEGParameters;
@@ -48,14 +72,19 @@ Organ::Organ()
     data->voiceParameters.organ.drawbars[1] = 1.0f; // only the 8' drawbar is out
     data->voiceParameters.organ.mixLevel = 0.25f;   // reduce mix level so adding more drawbars won't overdrive
     data->modParameters.masterVol = 0.4f;           // same thing here
-    data->modParameters.phaseDeltaMul = 1.0f;       // standard init value
 
-    setVelocitySensitivity(0.1f);    // organ has no velocity sensitivity; let's have just a bit
-    setTuningRatio(0.5f);            // tune down 1 octave, making 16' drawbar a sub-octave
+    data->modParameters.phaseDeltaMul = 1.0f;       // standard initial value
+
+    setVelocitySensitivity(0.1f);   // organ has no velocity sensitivity; let's have just a bit
+    setTuningRatio(0.5f);           // tune down 1 octave, making 16' drawbar a sub-octave
+
+    data->distortion.init(512);     // init distortion with table size of 512
+    data->leslie.setSpeed(4.0);     // start Leslie at "medium" speed
 }
 
 Organ::~Organ()
 {
+    data->distortion.deinit();
 }
 
 int Organ::init(double sampleRate)
@@ -81,12 +110,15 @@ int Organ::init(double sampleRate)
         vpa.push_back(&(data->voice[i]));
     }
     data->voiceManager.init(vpa, MAX_VOICE_COUNT, &renderPrepCallback, this);
-    
+
+    data->leslie.init(sampleRate);
+
     return 0;   // no error
 }
 
 void Organ::deinit()
 {
+    data->leslie.deinit();
 }
 
 void Organ::playNote(unsigned noteNumber, unsigned velocity, float noteFrequency)
@@ -113,7 +145,22 @@ void Organ::renderPrepCallback(void* thisPtr)
 
 void Organ::render(unsigned /*channelCount*/, unsigned sampleCount, float *outBuffers[])
 {
-    data->voiceManager.render(sampleCount, outBuffers);
+    // render voice data to work buffers
+    size_t bufferLength = sampleCount * sizeof(float);
+    memset(data->leftWorkBuffer, 0, bufferLength);
+    float *workBufs[2] = { data->leftWorkBuffer, data->rightWorkBuffer };
+    data->voiceManager.render(sampleCount, workBufs);
+
+    // apply distortion to work buffer (left channel only, since Leslie doesn't use right channel,
+    // and our voice data are mono anyway
+    for (int i = 0; i < sampleCount; i++)
+        data->distortion.processInPlace(data->leftWorkBuffer + i);
+
+    //memcpy(outBuffers[0], data->leftWorkBuffer, bufferLength);
+    //memcpy(outBuffers[1], data->leftWorkBuffer, bufferLength);
+    // now run the result through the Leslie to the output
+    const float *constWorkBufs[2] = { data->leftWorkBuffer, data->rightWorkBuffer };
+    data->leslie.render(sampleCount, constWorkBufs, outBuffers);
 }
 
 void Organ::setMasterVolume(float value)
@@ -124,6 +171,26 @@ void Organ::setMasterVolume(float value)
 float Organ::getMasterVolume()
 {
     return data->modParameters.masterVol;
+}
+
+void Organ::setVelocitySensitivity(float value)
+{
+    data->voiceManager.setVelocitySensitivity(value);
+}
+
+float Organ::getVelocitySensitivity()
+{
+    return data->voiceManager.getVelocitySensitivity();
+}
+
+void Organ::setTuningRatio(float value)
+{
+    data->voiceManager.setTuningRatio(value);
+}
+
+float Organ::getTuningRatio()
+{
+    return data->voiceManager.getTuningRatio();
 }
 
 void Organ::setAmpAttackDurationSeconds(float value)
@@ -191,22 +258,32 @@ float Organ::getHarmonicLevel(int index)
     return data->voiceParameters.organ.drawbars[index];
 }
 
-void Organ::setVelocitySensitivity(float value)
+void Organ::setPower(float power)
 {
-    data->voiceManager.setVelocitySensitivity(value);
+    data->distortion.setPower(power);
 }
 
-float Organ::getVelocitySensitivity()
+float Organ::getPower()
 {
-    return data->voiceManager.getVelocitySensitivity();
+    return data->distortion.getPower();
 }
 
-void Organ::setTuningRatio(float value)
+void Organ::setDrive(float drive)
 {
-    data->voiceManager.setTuningRatio(value);
+    data->distortion.setDrive(drive);
 }
 
-float Organ::getTuningRatio()
+float Organ::getDrive()
 {
-    return data->voiceManager.getTuningRatio();
+    return data->distortion.getDrive();
+}
+
+void Organ::setGain(float gain)
+{
+    data->distortion.setGain(gain);
+}
+
+float Organ::getGain()
+{
+    return data->distortion.getGain();
 }

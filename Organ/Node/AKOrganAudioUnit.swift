@@ -87,6 +87,18 @@ public class AKOrganAudioUnit: AKGeneratorAudioUnitBase {
         didSet { setParameter(.releaseDuration, value: releaseDuration) }
     }
 
+    var power: Double = 1.0 {
+        didSet { setParameter(.power, value: power) }
+    }
+
+    var drive: Double = 1.0 {
+        didSet { setParameter(.drive, value: drive) }
+    }
+
+    var outputLevel: Double = 1.0 {
+        didSet { setParameter(.outputLevel, value: outputLevel) }
+    }
+
     public override func initDSP(withSampleRate sampleRate: Double,
                                  channelCount count: AVAudioChannelCount) -> AKDSPRef {
         return createAKOrganDSP(Int32(count), sampleRate)
@@ -260,6 +272,36 @@ public class AKOrganAudioUnit: AKGeneratorAudioUnitBase {
 
         parameterAddress += 1
 
+        let powerParameter = AUParameterTree.createParameter(
+            identifier: "power",
+            name: "power",         // TODO: fix human-readable parameter name
+            address: parameterAddress,
+            range: 1.0...2.0,
+            unit: .generic,             // TODO: fix unit
+            flags: nonRampFlags)        // TODO: fix flags
+
+        parameterAddress += 1
+
+        let driveParameter = AUParameterTree.createParameter(
+            identifier: "drive",
+            name: "drive",         // TODO: fix human-readable parameter name
+            address: parameterAddress,
+            range: 1.0...2.5,
+            unit: .generic,             // TODO: fix unit
+            flags: nonRampFlags)        // TODO: fix flags
+
+        parameterAddress += 1
+
+        let outputLevelParameter = AUParameterTree.createParameter(
+            identifier: "outputLevel",
+            name: "outputLevel",         // TODO: fix human-readable parameter name
+            address: parameterAddress,
+            range: 1.0...2.5,
+            unit: .generic,             // TODO: fix unit
+            flags: nonRampFlags)        // TODO: fix flags
+
+        parameterAddress += 1
+
         setParameterTree(AUParameterTree(children: [
             masterVolumeParameter,
             pitchBendParameter,
@@ -277,6 +319,9 @@ public class AKOrganAudioUnit: AKGeneratorAudioUnitBase {
             decayDurationParameter,
             sustainLevelParameter,
             releaseDurationParameter,
+            powerParameter,
+            driveParameter,
+            outputLevelParameter,
             ]))
 
         masterVolumeParameter.value = 1.0
@@ -295,6 +340,9 @@ public class AKOrganAudioUnit: AKGeneratorAudioUnitBase {
         decayDurationParameter.value = 0.0
         sustainLevelParameter.value = 1.0
         releaseDurationParameter.value = 0.0
+        powerParameter.value = 1.0
+        driveParameter.value = 1.0
+        outputLevelParameter.value = 1.0
     }
 
     public override var canProcessInPlace: Bool { return true }

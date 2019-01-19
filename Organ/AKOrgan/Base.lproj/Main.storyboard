@@ -1054,6 +1054,9 @@
                                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xiq-hL-s4w">
                                                 <rect key="frame" x="86" y="8" width="276" height="19"/>
                                                 <sliderCell key="cell" state="on" alignment="left" minValue="1" maxValue="2" doubleValue="1" tickMarkPosition="above" sliderType="linear" id="EsU-gs-pSW"/>
+                                                <connections>
+                                                    <action selector="distortionChanged:" target="XfG-lQ-9wD" id="Fku-zC-nU4"/>
+                                                </connections>
                                             </slider>
                                         </subviews>
                                         <constraints>
@@ -1085,6 +1088,9 @@
                                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Nfj-Hd-J3M">
                                                 <rect key="frame" x="86" y="8" width="276" height="19"/>
                                                 <sliderCell key="cell" state="on" alignment="left" minValue="1" maxValue="2.5" doubleValue="1" tickMarkPosition="above" sliderType="linear" id="0tm-2a-LLa"/>
+                                                <connections>
+                                                    <action selector="driveChanged:" target="XfG-lQ-9wD" id="VDN-5v-S8q"/>
+                                                </connections>
                                             </slider>
                                         </subviews>
                                         <constraints>
@@ -1116,6 +1122,9 @@
                                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5aG-M9-G83">
                                                 <rect key="frame" x="86" y="8" width="276" height="19"/>
                                                 <sliderCell key="cell" state="on" alignment="left" minValue="1" maxValue="2.5" doubleValue="1" tickMarkPosition="above" sliderType="linear" id="19W-Tq-CnH"/>
+                                                <connections>
+                                                    <action selector="outputChanged:" target="XfG-lQ-9wD" id="BQi-bF-jQa"/>
+                                                </connections>
                                             </slider>
                                         </subviews>
                                         <constraints>
@@ -1165,6 +1174,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="distortion" destination="xiq-hL-s4w" id="w2u-57-UfO"/>
                         <outlet property="drawbar0" destination="zoR-H5-vfT" id="Qec-fC-DP9"/>
                         <outlet property="drawbar1" destination="0E6-Dk-DON" id="hAx-9U-UO3"/>
                         <outlet property="drawbar2" destination="6mk-Vs-z7t" id="vS7-gP-Mlg"/>
@@ -1174,6 +1184,8 @@
                         <outlet property="drawbar6" destination="oDT-i8-jFv" id="MIU-jl-4Lf"/>
                         <outlet property="drawbar7" destination="nOc-tp-w2U" id="w1Q-PQ-V4l"/>
                         <outlet property="drawbar8" destination="tl2-wN-cod" id="E0G-lL-1D4"/>
+                        <outlet property="drive" destination="Nfj-Hd-J3M" id="d80-xs-o6w"/>
+                        <outlet property="output" destination="5aG-M9-G83" id="1r8-8s-GjQ"/>
                         <outlet property="plot" destination="mcI-pr-RPU" id="vjP-sM-t7s"/>
                     </connections>
                 </viewController>

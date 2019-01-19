@@ -37,6 +37,9 @@ import AudioKit
     fileprivate var decayDurationParameter: AUParameter?
     fileprivate var sustainLevelParameter: AUParameter?
     fileprivate var releaseDurationParameter: AUParameter?
+    fileprivate var powerParameter: AUParameter?
+    fileprivate var driveParameter: AUParameter?
+    fileprivate var outputLevelParameter: AUParameter?
 
     /// Ramp Duration represents the speed at which parameters are allowed to change
     @objc open dynamic var rampDuration: Double = AKSettings.rampDuration {
@@ -269,6 +272,30 @@ import AudioKit
         }
     }
 
+    /// power   TODO: fix title
+    @objc open dynamic var power: Double = 1.0 {
+        willSet {
+            guard power != newValue else { return }
+            internalAU?.power = newValue
+        }
+    }
+
+    /// drive   TODO: fix title
+    @objc open dynamic var drive: Double = 1.0 {
+        willSet {
+            guard drive != newValue else { return }
+            internalAU?.drive = newValue
+        }
+    }
+
+    /// outputLevel   TODO: fix title
+    @objc open dynamic var outputLevel: Double = 1.0 {
+        willSet {
+            guard outputLevel != newValue else { return }
+            internalAU?.outputLevel = newValue
+        }
+    }
+
     // MARK: - Initialization
 
     /// Initialize this Organ node
@@ -290,6 +317,9 @@ import AudioKit
     ///   - decayDuration: 0.0 - 10.0, seconds
     ///   - sustainLevel: 0.0 - 1.0, fraction
     ///   - releaseDuration: 0.0 - 10.0, seconds
+    ///   - power: 1.0 - 2.0, arbitrary, 1.0 - 2.0
+    ///   - drive: 1.0 - 2.5, arbitrary, 1.0 - 2.5
+    ///   - outputLevel: 1.0 - 2.5, arbitrary, 1.0 - 2.5
     ///
     @objc public init(
         masterVolume: Double = 1.0,
@@ -307,7 +337,10 @@ import AudioKit
         attackDuration: Double = 0.0,
         decayDuration: Double = 0.0,
         sustainLevel: Double = 1.0,
-        releaseDuration: Double = 0.0 ) {
+        releaseDuration: Double = 0.0,
+        power: Double = 1.0,
+        drive: Double = 1.0,
+        outputLevel: Double = 1.0 ) {
 
         self.masterVolume = masterVolume
         self.pitchBend = pitchBend
@@ -325,6 +358,9 @@ import AudioKit
         self.decayDuration = decayDuration
         self.sustainLevel = sustainLevel
         self.releaseDuration = releaseDuration
+        self.power = power
+        self.drive = drive
+        self.outputLevel = outputLevel
 
         AKOrgan.register()
 
@@ -361,6 +397,9 @@ import AudioKit
         self.decayDurationParameter = tree["decayDuration"]
         self.sustainLevelParameter = tree["sustainLevel"]
         self.releaseDurationParameter = tree["releaseDuration"]
+        self.powerParameter = tree["power"]
+        self.driveParameter = tree["drive"]
+        self.outputLevelParameter = tree["outputLevel"]
 
         token = tree.token(byAddingParameterObserver: { [weak self] _, _ in
             guard self != nil else {
@@ -389,6 +428,9 @@ import AudioKit
         self.internalAU?.setParameterImmediately(.decayDuration, value: decayDuration)
         self.internalAU?.setParameterImmediately(.sustainLevel, value: sustainLevel)
         self.internalAU?.setParameterImmediately(.releaseDuration, value: releaseDuration)
+        self.internalAU?.setParameterImmediately(.power, value: power)
+        self.internalAU?.setParameterImmediately(.drive, value: drive)
+        self.internalAU?.setParameterImmediately(.outputLevel, value: outputLevel)
     }
 
     @objc open override func play(noteNumber: MIDINoteNumber, velocity: MIDIVelocity, frequency: Double) {

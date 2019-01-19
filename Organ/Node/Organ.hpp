@@ -30,6 +30,18 @@ public:
     void setVibratoDepth(float depth) { vibratoDepth = depth; }
     float getVibratoDepth() { return vibratoDepth; }
 
+    // Master volume: range 0 to 1, default 1.0
+    void setMasterVolume(float vol);
+    float getMasterVolume();
+
+    // Velocity sensitivity: range 0 to 1, default 1.0
+    void setVelocitySensitivity(float sens);
+    float getVelocitySensitivity();
+
+    // Tuning ratio: set e.g. 0.5 to play 1 octave below MIDI pitch
+    void setTuningRatio(float ratio);
+    float getTuningRatio();
+
     void  setAmpAttackDurationSeconds(float value);
     float getAmpAttackDurationSeconds(void);
     void  setAmpDecayDurationSeconds(float value);
@@ -46,18 +58,18 @@ public:
     void setHarmonicLevel(int index, float value);
     float getHarmonicLevel(int index);
 
-    // Master volume: range 0 to 1, default 1.0
-    void setMasterVolume(float vol);
-    float getMasterVolume();
+    // Distortion controls
+    void setPower(float power); // typically 1.0 to 2.0
+    float getPower();
+    void setDrive(float drive); // typically 1.0 to 2.5
+    float getDrive();
+    void setGain(float gain);   // typically 1.0 to 2.5
+    float getGain();
 
-    // Velocity sensitivity: range 0 to 1, default 1.0
-    void setVelocitySensitivity(float sens);
-    float getVelocitySensitivity();
+    // Leslie speed control: 1.0 to 8.0 (fractional part ignored)
+    void setLeslieSpeed(float speed);
+    float getLeslieSpeed();
 
-    // Tuning ratio: set e.g. 0.5 to play 1 octave below MIDI pitch
-    void setTuningRatio(float ratio);
-    float getTuningRatio();
-    
     void render(unsigned channelCount, unsigned sampleCount, float *outBuffers[]);
 
 protected:

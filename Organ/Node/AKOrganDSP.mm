@@ -123,6 +123,15 @@ void AKOrganDSP::setParameter(uint64_t address, float value, bool immediate)
         case AKOrganParameterReleaseDuration:
             setAmpReleaseDurationSeconds(value);
             break;
+        case AKOrganParameterPower:
+            setPower(value);
+            break;
+        case AKOrganParameterDrive:
+            setDrive(value);
+            break;
+        case AKOrganParameterOutputLevel:
+            setGain(value);
+            break;
     }
 }
 
@@ -165,6 +174,12 @@ float AKOrganDSP::getParameter(uint64_t address)
             return getAmpSustainFraction();
         case AKOrganParameterReleaseDuration:
             return getAmpReleaseDurationSeconds();
+        case AKOrganParameterPower:
+            return getPower();
+        case AKOrganParameterDrive:
+            return getDrive();
+        case AKOrganParameterOutputLevel:
+            return getGain();
     }
     return 0;
 }
@@ -201,7 +216,7 @@ void AKOrganDSP::process(AUAudioFrameCount frameCount, AUAudioFrameCount bufferO
         setDrawBar(7, (float)drawbar7Ramp.getValue());
         drawbar8Ramp.advanceTo(now + frameOffset);
         setDrawBar(8, (float)drawbar8Ramp.getValue());
-        
+
         // get data
         float *outBuffers[2];
         outBuffers[0] = (float *)outBufferListPtr->mBuffers[0].mData + frameOffset;

@@ -26,6 +26,10 @@ class ViewController: NSViewController, NSWindowDelegate {
     @IBOutlet weak var drawbar7: NSSlider!
     @IBOutlet weak var drawbar8: NSSlider!
 
+    @IBOutlet weak var distortion: NSSlider!
+    @IBOutlet weak var drive: NSSlider!
+    @IBOutlet weak var output: NSSlider!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -78,6 +82,13 @@ class ViewController: NSViewController, NSWindowDelegate {
     }
     @IBAction func drawbar8Changed(_ sender: NSSlider) {
         conductor.synth.drawbar8 = sender.doubleValue
+    }
+
+    @IBAction func distortionChanged(_ sender: NSSlider) {
+    }
+    @IBAction func driveChanged(_ sender: NSSlider) {
+    }
+    @IBAction func outputChanged(_ sender: NSSlider) {
     }
 
 }
