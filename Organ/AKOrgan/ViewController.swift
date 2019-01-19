@@ -36,15 +36,19 @@ class ViewController: NSViewController, NSWindowDelegate {
         conductor.midi.addListener(self)
         plot.node = conductor.plotout
 
-        drawbar0.doubleValue = conductor.synth.drawbar0
-        drawbar1.doubleValue = conductor.synth.drawbar1
-        drawbar2.doubleValue = conductor.synth.drawbar2
-        drawbar3.doubleValue = conductor.synth.drawbar3
-        drawbar4.doubleValue = conductor.synth.drawbar4
-        drawbar5.doubleValue = conductor.synth.drawbar5
-        drawbar6.doubleValue = conductor.synth.drawbar6
-        drawbar7.doubleValue = conductor.synth.drawbar7
-        drawbar8.doubleValue = conductor.synth.drawbar8
+        drawbar0.doubleValue = conductor.organ.drawbar0
+        drawbar1.doubleValue = conductor.organ.drawbar1
+        drawbar2.doubleValue = conductor.organ.drawbar2
+        drawbar3.doubleValue = conductor.organ.drawbar3
+        drawbar4.doubleValue = conductor.organ.drawbar4
+        drawbar5.doubleValue = conductor.organ.drawbar5
+        drawbar6.doubleValue = conductor.organ.drawbar6
+        drawbar7.doubleValue = conductor.organ.drawbar7
+        drawbar8.doubleValue = conductor.organ.drawbar8
+
+        distortion.doubleValue = conductor.organ.power
+        drive.doubleValue = conductor.organ.drive
+        output.doubleValue = conductor.organ.outputLevel
     }
 
     override func viewDidAppear() {
@@ -57,38 +61,41 @@ class ViewController: NSViewController, NSWindowDelegate {
     }
 
     @IBAction func drawbar0Changed(_ sender: NSSlider) {
-        conductor.synth.drawbar0 = sender.doubleValue
+        conductor.organ.drawbar0 = sender.doubleValue
     }
     @IBAction func drawbar1Changed(_ sender: NSSlider) {
-        conductor.synth.drawbar1 = sender.doubleValue
+        conductor.organ.drawbar1 = sender.doubleValue
     }
     @IBAction func drawbar2Changed(_ sender: NSSlider) {
-        conductor.synth.drawbar2 = sender.doubleValue
+        conductor.organ.drawbar2 = sender.doubleValue
     }
     @IBAction func drawbar3Changed(_ sender: NSSlider) {
-        conductor.synth.drawbar3 = sender.doubleValue
+        conductor.organ.drawbar3 = sender.doubleValue
     }
     @IBAction func drawbar4Changed(_ sender: NSSlider) {
-        conductor.synth.drawbar4 = sender.doubleValue
+        conductor.organ.drawbar4 = sender.doubleValue
     }
     @IBAction func drawbar5Changed(_ sender: NSSlider) {
-        conductor.synth.drawbar5 = sender.doubleValue
+        conductor.organ.drawbar5 = sender.doubleValue
     }
     @IBAction func drawbar6Changed(_ sender: NSSlider) {
-        conductor.synth.drawbar6 = sender.doubleValue
+        conductor.organ.drawbar6 = sender.doubleValue
     }
     @IBAction func drawbar7Changed(_ sender: NSSlider) {
-        conductor.synth.drawbar7 = sender.doubleValue
+        conductor.organ.drawbar7 = sender.doubleValue
     }
     @IBAction func drawbar8Changed(_ sender: NSSlider) {
-        conductor.synth.drawbar8 = sender.doubleValue
+        conductor.organ.drawbar8 = sender.doubleValue
     }
 
     @IBAction func distortionChanged(_ sender: NSSlider) {
+        conductor.organ.power = sender.doubleValue
     }
     @IBAction func driveChanged(_ sender: NSSlider) {
+        conductor.organ.drive = sender.doubleValue
     }
     @IBAction func outputChanged(_ sender: NSSlider) {
+        conductor.organ.outputLevel = sender.doubleValue
     }
 
 }

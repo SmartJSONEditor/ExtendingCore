@@ -99,6 +99,10 @@ public class AKOrganAudioUnit: AKGeneratorAudioUnitBase {
         didSet { setParameter(.outputLevel, value: outputLevel) }
     }
 
+    var leslieSpeed: Double = 4.0 {
+        didSet { setParameter(.leslieSpeed, value: leslieSpeed) }
+    }
+
     public override func initDSP(withSampleRate sampleRate: Double,
                                  channelCount count: AVAudioChannelCount) -> AKDSPRef {
         return createAKOrganDSP(Int32(count), sampleRate)
@@ -302,6 +306,16 @@ public class AKOrganAudioUnit: AKGeneratorAudioUnitBase {
 
         parameterAddress += 1
 
+        let leslieSpeedParameter = AUParameterTree.createParameter(
+            identifier: "leslieSpeed",
+            name: "leslieSpeed",         // TODO: fix human-readable parameter name
+            address: parameterAddress,
+            range: 1.0...8.0,
+            unit: .generic,             // TODO: fix unit
+            flags: nonRampFlags)        // TODO: fix flags
+
+        parameterAddress += 1
+
         setParameterTree(AUParameterTree(children: [
             masterVolumeParameter,
             pitchBendParameter,
@@ -322,6 +336,7 @@ public class AKOrganAudioUnit: AKGeneratorAudioUnitBase {
             powerParameter,
             driveParameter,
             outputLevelParameter,
+            leslieSpeedParameter,
             ]))
 
         masterVolumeParameter.value = 1.0
@@ -343,6 +358,7 @@ public class AKOrganAudioUnit: AKGeneratorAudioUnitBase {
         powerParameter.value = 1.0
         driveParameter.value = 1.0
         outputLevelParameter.value = 1.0
+        leslieSpeedParameter.value = 4.0
     }
 
     public override var canProcessInPlace: Bool { return true }

@@ -40,6 +40,7 @@ import AudioKit
     fileprivate var powerParameter: AUParameter?
     fileprivate var driveParameter: AUParameter?
     fileprivate var outputLevelParameter: AUParameter?
+    fileprivate var leslieSpeedParameter: AUParameter?
 
     /// Ramp Duration represents the speed at which parameters are allowed to change
     @objc open dynamic var rampDuration: Double = AKSettings.rampDuration {
@@ -296,6 +297,14 @@ import AudioKit
         }
     }
 
+    /// leslieSpeed   TODO: fix title
+    @objc open dynamic var leslieSpeed: Double = 4.0 {
+        willSet {
+            guard leslieSpeed != newValue else { return }
+            internalAU?.leslieSpeed = newValue
+        }
+    }
+
     // MARK: - Initialization
 
     /// Initialize this Organ node
@@ -320,6 +329,7 @@ import AudioKit
     ///   - power: 1.0 - 2.0, arbitrary, 1.0 - 2.0
     ///   - drive: 1.0 - 2.5, arbitrary, 1.0 - 2.5
     ///   - outputLevel: 1.0 - 2.5, arbitrary, 1.0 - 2.5
+    ///   - leslieSpeed: 1.0 - 8.0, arbitrary, 1 .. 8
     ///
     @objc public init(
         masterVolume: Double = 1.0,
@@ -340,7 +350,8 @@ import AudioKit
         releaseDuration: Double = 0.0,
         power: Double = 1.0,
         drive: Double = 1.0,
-        outputLevel: Double = 1.0 ) {
+        outputLevel: Double = 1.0,
+        leslieSpeed: Double = 4.0 ) {
 
         self.masterVolume = masterVolume
         self.pitchBend = pitchBend
@@ -361,6 +372,7 @@ import AudioKit
         self.power = power
         self.drive = drive
         self.outputLevel = outputLevel
+        self.leslieSpeed = leslieSpeed
 
         AKOrgan.register()
 
@@ -400,6 +412,7 @@ import AudioKit
         self.powerParameter = tree["power"]
         self.driveParameter = tree["drive"]
         self.outputLevelParameter = tree["outputLevel"]
+        self.leslieSpeedParameter = tree["leslieSpeed"]
 
         token = tree.token(byAddingParameterObserver: { [weak self] _, _ in
             guard self != nil else {
@@ -431,6 +444,7 @@ import AudioKit
         self.internalAU?.setParameterImmediately(.power, value: power)
         self.internalAU?.setParameterImmediately(.drive, value: drive)
         self.internalAU?.setParameterImmediately(.outputLevel, value: outputLevel)
+        self.internalAU?.setParameterImmediately(.leslieSpeed, value: leslieSpeed)
     }
 
     @objc open override func play(noteNumber: MIDINoteNumber, velocity: MIDIVelocity, frequency: Double) {

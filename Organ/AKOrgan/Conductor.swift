@@ -18,7 +18,7 @@ class Conductor {
     static let shared = Conductor()
 
     let midi = AKMIDI()
-    var synth: AKOrgan
+    var organ: AKOrgan
     var reverb: AKZitaReverb
     var dryWet: AKDryWetMixer
     var plotout: AKMixer
@@ -41,9 +41,9 @@ class Conductor {
         AKSettings.enableLogging = false
 
         // Signal Chain
-        synth = AKOrgan()
-        reverb = AKZitaReverb(synth)
-        dryWet = AKDryWetMixer(synth, reverb, balance: 0.5)
+        organ = AKOrgan()
+        reverb = AKZitaReverb(organ)
+        dryWet = AKDryWetMixer(organ, reverb, balance: 0.5)
         plotout = AKMixer(dryWet)
 
         // Set Output & Start AudioKit
@@ -55,14 +55,11 @@ class Conductor {
         }
 
         // Initial parameters setup: synth
-        synth.attackDuration = 0.01
-        synth.decayDuration = 0.01
-        synth.sustainLevel = 0.8
-        synth.releaseDuration = 0.25
-        synth.vibratoDepth = 0.0
-
-        synth.drawbar0 = 1.0
-        synth.drawbar1 = 0.5
+        organ.attackDuration = 0.01
+        organ.decayDuration = 0.01
+        organ.sustainLevel = 0.8
+        organ.releaseDuration = 0.25
+        organ.vibratoDepth = 0.0
     }
 
     func addMIDIListener(_ listener: AKMIDIListener) {
@@ -85,17 +82,17 @@ class Conductor {
 
     func playNote(note: MIDINoteNumber, velocity: MIDIVelocity, channel: MIDIChannel) {
         // key-up, key-down and pedal operations are mediated by SDSustainer
-        synth.play(noteNumber: offsetNote(note, semitones: synthSemitoneOffset), velocity: velocity)
+        organ.play(noteNumber: offsetNote(note, semitones: synthSemitoneOffset), velocity: velocity)
     }
 
     func stopNote(note: MIDINoteNumber, channel: MIDIChannel) {
         // key-up, key-down and pedal operations are mediated by SDSustainer
-        synth.stop(noteNumber: offsetNote(note, semitones: synthSemitoneOffset))
+        organ.stop(noteNumber: offsetNote(note, semitones: synthSemitoneOffset))
     }
 
     func allNotesOff() {
         for note in 0 ... 127 {
-            synth.stop(noteNumber: MIDINoteNumber(note + synthSemitoneOffset))
+            organ.stop(noteNumber: MIDINoteNumber(note + synthSemitoneOffset))
         }
     }
 
@@ -105,9 +102,10 @@ class Conductor {
     func controller(_ controller: MIDIByte, value: MIDIByte) {
         switch controller {
         case AKMIDIControl.modulationWheel.rawValue:
-            synth.vibratoDepth = 0.5 * Double(value) / 128.0
+            organ.vibratoDepth = 0.5 * Double(value) / 128.0
         case AKMIDIControl.damperOnOff.rawValue:
-            synth.sustainPedal(pedalDown: value != 0)
+            // use damper pedal to control Leslie speed, like the Apple B3 emulator does
+            organ.leslieSpeed = value != 0 ? 8.0 : 4.0
         default:
             break
         }
@@ -117,9 +115,9 @@ class Conductor {
         let pwValue = Double(pitchWheelValue)
         let scale = (pwValue - 8_192.0) / 8_192.0
         if scale >= 0.0 {
-            synth.pitchBend = scale * self.pitchBendUpSemitones
+            organ.pitchBend = scale * self.pitchBendUpSemitones
         } else {
-            synth.pitchBend = scale * self.pitchBendDownSemitones
+            organ.pitchBend = scale * self.pitchBendDownSemitones
         }
     }
 

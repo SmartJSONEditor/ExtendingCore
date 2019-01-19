@@ -37,6 +37,7 @@ typedef NS_ENUM(AUParameterAddress, AKOrganParameter)
     AKOrganParameterPower,
     AKOrganParameterDrive,
     AKOrganParameterOutputLevel,
+    AKOrganParameterLeslieSpeed,
 
     // ensure this is always last in the list, to simplify parameter addressing
     AKOrganParameterRampDuration,

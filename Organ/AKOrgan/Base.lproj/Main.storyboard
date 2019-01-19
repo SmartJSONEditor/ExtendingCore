@@ -1053,7 +1053,7 @@
                                             </textField>
                                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xiq-hL-s4w">
                                                 <rect key="frame" x="86" y="8" width="276" height="19"/>
-                                                <sliderCell key="cell" state="on" alignment="left" minValue="1" maxValue="2" doubleValue="1" tickMarkPosition="above" sliderType="linear" id="EsU-gs-pSW"/>
+                                                <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="1" maxValue="2" doubleValue="1" tickMarkPosition="above" sliderType="linear" id="EsU-gs-pSW"/>
                                                 <connections>
                                                     <action selector="distortionChanged:" target="XfG-lQ-9wD" id="Fku-zC-nU4"/>
                                                 </connections>
@@ -1087,7 +1087,7 @@
                                             </textField>
                                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Nfj-Hd-J3M">
                                                 <rect key="frame" x="86" y="8" width="276" height="19"/>
-                                                <sliderCell key="cell" state="on" alignment="left" minValue="1" maxValue="2.5" doubleValue="1" tickMarkPosition="above" sliderType="linear" id="0tm-2a-LLa"/>
+                                                <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="1" maxValue="2.5" doubleValue="1" tickMarkPosition="above" sliderType="linear" id="0tm-2a-LLa"/>
                                                 <connections>
                                                     <action selector="driveChanged:" target="XfG-lQ-9wD" id="VDN-5v-S8q"/>
                                                 </connections>
@@ -1121,7 +1121,7 @@
                                             </textField>
                                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5aG-M9-G83">
                                                 <rect key="frame" x="86" y="8" width="276" height="19"/>
-                                                <sliderCell key="cell" state="on" alignment="left" minValue="1" maxValue="2.5" doubleValue="1" tickMarkPosition="above" sliderType="linear" id="19W-Tq-CnH"/>
+                                                <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="1" maxValue="2.5" doubleValue="1" tickMarkPosition="above" sliderType="linear" id="19W-Tq-CnH"/>
                                                 <connections>
                                                     <action selector="outputChanged:" target="XfG-lQ-9wD" id="BQi-bF-jQa"/>
                                                 </connections>

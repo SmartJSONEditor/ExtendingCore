@@ -132,6 +132,9 @@ void AKOrganDSP::setParameter(uint64_t address, float value, bool immediate)
         case AKOrganParameterOutputLevel:
             setGain(value);
             break;
+        case AKOrganParameterLeslieSpeed:
+            setLeslieSpeed(value);
+            break;
     }
 }
 
@@ -166,6 +169,7 @@ float AKOrganDSP::getParameter(uint64_t address)
         case AKOrganParameterDrawbar8:
             return drawbar8Ramp.getTarget();
 
+
         case AKOrganParameterAttackDuration:
             return getAmpAttackDurationSeconds();
         case AKOrganParameterDecayDuration:
@@ -180,6 +184,8 @@ float AKOrganDSP::getParameter(uint64_t address)
             return getDrive();
         case AKOrganParameterOutputLevel:
             return getGain();
+        case AKOrganParameterLeslieSpeed:
+            return getLeslieSpeed();
     }
     return 0;
 }

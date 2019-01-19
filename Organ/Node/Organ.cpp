@@ -287,3 +287,13 @@ float Organ::getGain()
 {
     return data->distortion.getGain();
 }
+
+void Organ::setLeslieSpeed(float speed)
+{
+    data->leslie.setSpeed(speed);
+}
+
+float Organ::getLeslieSpeed()
+{
+    return data->leslie.getSpeed();
+}
