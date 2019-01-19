@@ -5,7 +5,7 @@ def capitalizeFirstLetterOnly(string):
     return string[:1].upper() + string[1:]
 
 env = Environment(
-    loader = FileSystemLoader('templates'),
+    loader = FileSystemLoader('templates-synth'),
     trim_blocks = True,
     lstrip_blocks = True
 )
@@ -18,6 +18,7 @@ vars = {
     'AUID': 'AKor',
     'baseClass': 'Organ',
     'rampedParameters': [
+        # (name, initial value, min, max, description)
         ('masterVolume', 1.0, 0.0, 1.0, 'fraction'),
         ('pitchBend', 0.0, -1000.0, 1000.0, 'semitones, signed'),
         ('vibratoDepth', 1.0, 0.0, 1000.0, 'semitones, usually < 1.0'),
@@ -35,6 +36,7 @@ vars = {
         
     ],
     'simpleParameters': [
+        # (name, initial value, min, max, description)
         ('attackDuration', 0.0, 0.0, 10.0, 'seconds'),
         ('decayDuration', 0.0, 0.0, 10.0, 'seconds'),
         ('sustainLevel', 1.0, 0.0, 1.0, 'fraction'),
