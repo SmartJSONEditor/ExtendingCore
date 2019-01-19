@@ -43,3 +43,14 @@ The point of step 3 is to develop your low-level DSP code using *appropriate* to
 
 The biggest point about steps 4 and 5 is that they come *after* your DSP code is essentially done--written, debugged, and at least partly optimized. Once you get to step 5, you're dealing with a complex multi-language environment in Xcode, which is *not at all* ideal if you still have more debugging to do. At this stage, your goal should simply be to *validate* that all of your DSP code's functions and parameters are accessible from Swift, and that operations like parameter-updating can be done dynamically (not just prior to start-up) and execute smoothly with no audio glitching.
 
+## What's here
+This repo is the result of working through first 5 steps of the process described above, to create a new polyphonic synthesizer (polysynth) somewhat reminiscent of a [Hammond organ](https://en.wikipedia.org/wiki/Hammond_organ), which makes use of the [DrawbarsOscillator](https://github.com/AudioKit/AudioKit/blob/master/AudioKit/Core/AudioKitCore/Synth/DrawbarsOscillator.hpp) class from [AudioKitCore/Synth](https://github.com/AudioKit/AudioKit/tree/master/AudioKit/Core/AudioKitCore/Synth), and adds a simple distortion effect and an emulation of the [Leslie](https://en.wikipedia.org/wiki/Leslie_speaker) rotating-speaker effect which gave the Hammond organs part of their characteristic sound.
+
+NOTE: The Leslie effect code is adapted from the [setBfree project](https://github.com/pantherb/setBfree) which is open-source, but *subject to the GPL license*, which does NOT permit its use in closed-source projects. (The [setBfree GitHub repo](https://github.com/pantherb/setBfree) specifies the GPL2, but the [actual code](https://github.com/pantherb/setBfree/blob/master/b_whirl/whirl.c) specifies that it may be used under the terms of any later version. I use the [GPL3](https://www.gnu.org/licenses/gpl-3.0.en.html), which provides clarification for how GPL-licensed code can be used together with more permissive licenses, such as the [MIT license](https://opensource.org/licenses/MIT), which governs the rest of the code in this repo, as well as all of AudioKit.)
+
+* The *Common* folder contains some new C++ classes which are written as part of *AudioKitCore* and are likely to move to that part of AudioKit in future.
+* The *Leslie* folder contains the C Leslie-effect code from the [setBfree project](https://github.com/pantherb/setBfree), and my own C++ wrapper code.
+* The *Organ* folder contains the rest of the Organ code example, including both a preliminary JUCE-based version and an AudioKit version.
+* The *Python wrapper generator* folder contains template-based code generation tools which substantially automate the work of step 4 in the previous section.
+
+See the *README.md* files in each folder for more details.
