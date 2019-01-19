@@ -1,5 +1,5 @@
 # audiokit-codegenerators
-Wrapper generators for [AudioKit](https://github.com/AudioKit/AudioKit) nodes, based on [Jinja2](http://jinja.pocoo.org/) templates.
+Wrapper generators for [AudioKit](https://github.com/AudioKit/AudioKit) nodes, based on [Jinja2](http://jinja.pocoo.org/) templates. This helps when creating new synth nodes based on C++ code in AudioKit Core and/or additional code written in a similar fashion.
 
 Works fine in the Python v2.7 installed by default on macOS Mojave, BUT you'll need to install Jinja32 as
 ```
@@ -24,5 +24,3 @@ This will create four files, which collectively wrap the C++ *AKCoreSynth* class
 * *AKSynth.swift*: Top-level *AKPolyphonicNode*-derived class, based on *templates/AKNode.swift*
 
 These are almost identical to the existing files in *AudioKit/AudioKit/Common/Nodes/Generators/Polysynths/Synth*, except for one spot in the generated *AKSynthAudioUnit.swift* where an extra comma is generated (too much work to fix this in the template), and several spots marked with *TODO* comments.
-
-The idea of all this is to provide a basis for additional polysynth nodes based on C++ code in AudioKit Core and/or additional code written in a similar fashion.
