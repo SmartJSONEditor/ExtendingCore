@@ -18,7 +18,7 @@
 #include <math.h>
 #include <list>
 
-#define MAX_VOICE_COUNT 32      // number of voices
+#define MAX_VOICE_COUNT 16      // number of voices
 #define MIDI_NOTENUMBERS 128    // MIDI offers 128 distinct note numbers
 
 namespace AudioKitCore
