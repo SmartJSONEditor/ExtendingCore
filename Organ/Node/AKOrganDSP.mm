@@ -32,7 +32,7 @@ extern "C" void doAKOrganSustainPedal(void *pDSP, bool pedalDown)
 AKOrganDSP::AKOrganDSP() : Organ()
 {
     masterVolumeRamp.setTarget(1.0, true);
-    pitchBendRamp.setTarget(2.0, true);
+    pitchBendRamp.setTarget(0.0, true);
     vibratoDepthRamp.setTarget(1.0, true);
     drawbar0Ramp.setTarget(0.0, true);
     drawbar1Ramp.setTarget(0.0, true);

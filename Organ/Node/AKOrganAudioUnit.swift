@@ -27,7 +27,7 @@ public class AKOrganAudioUnit: AKGeneratorAudioUnitBase {
         didSet { setParameter(.masterVolume, value: masterVolume) }
     }
 
-    var pitchBend: Double = 2.0 {
+    var pitchBend: Double = 0.0 {
         didSet { setParameter(.pitchBend, value: pitchBend) }
     }
 
@@ -340,7 +340,7 @@ public class AKOrganAudioUnit: AKGeneratorAudioUnitBase {
             ]))
 
         masterVolumeParameter.value = 1.0
-        pitchBendParameter.value = 2.0
+        pitchBendParameter.value = 0.0
         vibratoDepthParameter.value = 1.0
         drawbar0Parameter.value = 0.0
         drawbar1Parameter.value = 0.0

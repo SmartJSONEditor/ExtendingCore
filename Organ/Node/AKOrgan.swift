@@ -66,7 +66,7 @@ import AudioKit
     }
 
     /// pitchBend   TODO: fix title
-    @objc open dynamic var pitchBend: Double = 2.0 {
+    @objc open dynamic var pitchBend: Double = 0.0 {
         willSet {
             guard pitchBend != newValue else { return }
 
@@ -333,7 +333,7 @@ import AudioKit
     ///
     @objc public init(
         masterVolume: Double = 1.0,
-        pitchBend: Double = 2.0,
+        pitchBend: Double = 0.0,
         vibratoDepth: Double = 1.0,
         drawbar0: Double = 0.0,
         drawbar1: Double = 0.0,

@@ -19,7 +19,7 @@ vars = {
     'baseClass': 'Organ',
     'rampedParameters': [
         ('masterVolume', 1.0, 0.0, 1.0, 'fraction'),
-        ('pitchBend', 2.0, -1000.0, 1000.0, 'semitones, signed'),
+        ('pitchBend', 0.0, -1000.0, 1000.0, 'semitones, signed'),
         ('vibratoDepth', 1.0, 0.0, 1000.0, 'semitones, usually < 1.0'),
         ('drawbar0', 0.0, 0.0, 1.0, 'fraction'),
         ('drawbar1', 0.0, 0.0, 1.0, 'fraction'),
