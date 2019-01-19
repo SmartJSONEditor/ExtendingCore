@@ -1,7 +1,7 @@
 # audiokit-codegenerators
 Wrapper generators for [AudioKit](https://github.com/AudioKit/AudioKit) nodes, based on [Jinja2](http://jinja.pocoo.org/) templates. This helps when creating new synth nodes based on C++ code in AudioKit Core and/or additional code written in a similar fashion.
 
-Works fine in the Python v2.7 installed by default on macOS Mojave, BUT you'll need to install Jinja32 as
+Works fine in the Python v2.7 installed by default on macOS Mojave (or Windows, or Linux), BUT you'll need to install Jinja32 as
 ```
 sudo easy_install Jinja2
 ```

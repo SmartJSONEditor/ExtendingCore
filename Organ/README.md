@@ -1,5 +1,5 @@
 # Organ
-A [Hammond](https://en.wikipedia.org/wiki/Hammond_organ)-like organ project for [JUCE](https://juce.com/) and [AudioKit](https://audiokit.io/).
+A [Hammond organ](https://en.wikipedia.org/wiki/Hammond_organ)-like MIDI instrument project for [JUCE](https://juce.com/) and [AudioKit](https://audiokit.io/).
 
 ## The story
 This entire repo is the latest step in a long process to expand the [AudioKit Core](https://github.com/AudioKit/AudioKit/tree/master/AudioKit/Core/AudioKitCore). The *Core* initiative itself was primarily aimed at making at least some of AudioKit's underlying C/C\++ code platform-independent, and in that it has been successful. Most of what was done in *Core* was aimed at creating *complete functional blocks* (Nodes) for use in AudioKit/Swift programs. The *AKSampler* instrument and *AKChorus/AKFlanger* effects were the most successful outcomes.

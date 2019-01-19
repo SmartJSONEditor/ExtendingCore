@@ -5,6 +5,8 @@ You might want to do this if you want to implement, say, a polyphonic synthesize
 
 While AudioKit already offers an extensive collection of pre-built DSP nodes, it's not possible for us to offer every conceivable combination of low-level elements. Instead we provide, in [AudioKitCore](https://github.com/AudioKit/AudioKit/tree/master/AudioKit/Core/AudioKitCore), a basic collection of elements plus a few fully composed examples (e.g. [AKSampler](https://github.com/AudioKit/AudioKit/tree/master/AudioKit/Core/AudioKitCore/Sampler) and [AKModulatedDelay](https://github.com/AudioKit/AudioKit/tree/master/AudioKit/Core/AudioKitCore/ModulatedDelay)). There is also a [basic "extending AudioKit" tutorial example](https://github.com/AudioKit/AudioKit/tree/master/Developer/macOS/ExtendingAudioKit) within the main AudioKit repo, which this repo builds upon.
 
+One nice aspect of the development process (suggested below) is that it yields a [JUCE](https://juce.com/)-based implementation as an intermediate product, which is inherently cross-platform, and can be used to compile stand-alone apps and plug-ins for both desktop and mobile platforms.
+
 ## From DSP code to AudioKit Nodes
 AudioKit is primarily a framework for programming audio in Swift. Because Swift's run-time overhead makes it not fast/efficient enough for real-time audio DSP, it's necessary to write the DSP parts (which Apple refers to as *kernels*) in C and/or C++. Making DSP code accessible from Swift involves adding several layers of code as follows.
 
