@@ -15,12 +15,12 @@ because I'm used to *pip*.
 
 Once you've done that, run (in this directory):
 ```
-python Synth.py
+python Organ.py
 ```
-This will create four files, which collectively wrap the C++ *AKCoreSynth* class defined in *AudioKitCore/Synth/AKCoreSynth*[.hpp|.cpp], for use in an AudioKit Swift program.
-* *AKSynthDSP.hpp*: Objective-C header, based on *templates/AKDSP.hpp*
-* *AKSynthDSP.mm*: Objective-C wrapper for *AKCoreSynth* C++ code, based on *templates/AKDSP.mm*
-* *AKSynthAudioUnit.swift*: Swift AU class, based on *templates/AKAudioUnit.swift*
-* *AKSynth.swift*: Top-level *AKPolyphonicNode*-derived class, based on *templates/AKNode.swift*
+This will create four files, which collectively wrap the C++ *AKOrgan* class defined in *Organ/Source/Organ[.hpp|.cpp]*, for use in an AudioKit Swift program.
+* *AKOrganDSP.hpp*: Objective-C header, based on *templates-synth/AKDSP.hpp*
+* *AKOrgabDSP.mm*: Objective-C wrapper for *AKOrgan* C++ code, based on *templates-synth/AKDSP.mm*
+* *AKOrganAudioUnit.swift*: Swift AU class, based on *templates-synth/AKAudioUnit.swift*
+* *AKOrgan.swift*: Top-level *AKPolyphonicNode*-derived class, based on *templates-synth/AKNode.swift*
 
-These are almost identical to the existing files in *AudioKit/AudioKit/Common/Nodes/Generators/Polysynths/Synth*, except for one spot in the generated *AKSynthAudioUnit.swift* where an extra comma is generated (too much work to fix this in the template), and several spots marked with *TODO* comments.
+These template-generated files will get you 90% of the way to working code. You'll likely get a compile error in the top-level Swift file, owing to an extra comma being generated at the end of a function-arguments list; I saw no point in making the templates more complex just to make little issues like this go away. It's more helpful that the templates remain simple and legible, so you can understand the structure of the auto-generated code.
